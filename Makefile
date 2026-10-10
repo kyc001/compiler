@@ -6,8 +6,8 @@ compiler:
 test: compiler
 	ctest --test-dir build/compiler --output-on-failure
 prep:
-	python3 scripts/run_preparation.py
+	python3 lab0/scripts/run_preparation.py
 report:
-	python3 scripts/build_report.py
+	python3 lab0/scripts/build_report.py
 clean:
-	python3 scripts/clean.py
+	python3 lab0/scripts/clean.py

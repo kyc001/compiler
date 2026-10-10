@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "executed_at": "2026-10-10T09:43:02.191674+00:00",
+  "executed_at": "2026-10-10T10:40:27.941894+00:00",
   "tools": {
     "gcc": "gcc (Ubuntu 12.3.0-1ubuntu1~22.04.3) 12.3.0",
     "clang-15": "Ubuntu clang version 15.0.7",
@@ -705,9 +705,9 @@
       "factorial_O2": 56
     },
     "file_bytes": {
-      "factorial": 17704,
-      "factorial_O2": 18768,
-      "factorial_static": 1035896,
+      "factorial": 17712,
+      "factorial_O2": 18776,
+      "factorial_static": 1035912,
       "factorial_no_debug": 16104
     },
     "debug_info_present": {
@@ -2480,2016 +2480,2016 @@
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -E prep/01_pipeline/factorial.c -o build/prep/pipeline/factorial.i",
+      "command": "/usr/bin/gcc -E lab0/prep/01_pipeline/factorial.c -o lab0/build/prep/pipeline/factorial.i",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -E -DFIRST_FACTOR=3 prep/01_pipeline/factorial.c -o build/prep/pipeline/factorial_macro3.i",
+      "command": "/usr/bin/gcc -E -DFIRST_FACTOR=3 lab0/prep/01_pipeline/factorial.c -o lab0/build/prep/pipeline/factorial_macro3.i",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -S -O0 -g build/prep/pipeline/factorial.i -o build/prep/pipeline/factorial_O0.s",
+      "command": "/usr/bin/gcc -S -O0 -g lab0/build/prep/pipeline/factorial.i -o lab0/build/prep/pipeline/factorial_O0.s",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -S -O2 -g prep/01_pipeline/factorial.c -o build/prep/pipeline/factorial_O2.s",
+      "command": "/usr/bin/gcc -S -O2 -g lab0/prep/01_pipeline/factorial.c -o lab0/build/prep/pipeline/factorial_O2.s",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -c build/prep/pipeline/factorial_O0.s -o build/prep/pipeline/factorial.o",
+      "command": "/usr/bin/gcc -c lab0/build/prep/pipeline/factorial_O0.s -o lab0/build/prep/pipeline/factorial.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc build/prep/pipeline/factorial.o -o build/prep/pipeline/factorial",
+      "command": "/usr/bin/gcc lab0/build/prep/pipeline/factorial.o -o lab0/build/prep/pipeline/factorial",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -DFIRST_FACTOR=3 prep/01_pipeline/factorial.c -o build/prep/pipeline/factorial_macro3",
+      "command": "/usr/bin/gcc -DFIRST_FACTOR=3 lab0/prep/01_pipeline/factorial.c -o lab0/build/prep/pipeline/factorial_macro3",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -static build/prep/pipeline/factorial.o -o build/prep/pipeline/factorial_static",
+      "command": "/usr/bin/gcc -static lab0/build/prep/pipeline/factorial.o -o lab0/build/prep/pipeline/factorial_static",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -O2 -g prep/01_pipeline/factorial.c -o build/prep/pipeline/factorial_O2",
+      "command": "/usr/bin/gcc -O2 -g lab0/prep/01_pipeline/factorial.c -o lab0/build/prep/pipeline/factorial_O2",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -O0 prep/01_pipeline/factorial.c -o build/prep/pipeline/factorial_no_debug",
+      "command": "/usr/bin/gcc -O0 lab0/prep/01_pipeline/factorial.c -o lab0/build/prep/pipeline/factorial_no_debug",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/gcc -O0 -fdump-tree-original=build/prep/pipeline/factorial.original -fdump-tree-gimple=build/prep/pipeline/factorial.gimple -c prep/01_pipeline/factorial.c -o build/prep/pipeline/factorial_dump.o",
+      "command": "/usr/bin/gcc -O0 -fdump-tree-original=lab0/build/prep/pipeline/factorial.original -fdump-tree-gimple=lab0/build/prep/pipeline/factorial.gimple -c lab0/prep/01_pipeline/factorial.c -o lab0/build/prep/pipeline/factorial_dump.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -fsyntax-only -Xclang -dump-tokens prep/01_pipeline/factorial.c",
+      "command": "/usr/bin/clang-15 -fsyntax-only -Xclang -dump-tokens lab0/prep/01_pipeline/factorial.c",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -fsyntax-only -Xclang -ast-dump prep/01_pipeline/factorial.c",
+      "command": "/usr/bin/clang-15 -fsyntax-only -Xclang -ast-dump lab0/prep/01_pipeline/factorial.c",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -fsyntax-only prep/01_pipeline/semantic_error.c",
+      "command": "/usr/bin/clang-15 -fsyntax-only lab0/prep/01_pipeline/semantic_error.c",
       "stdin": null,
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "/usr/bin/clang-15 -S -emit-llvm -O0 -Xclang -disable-O0-optnone prep/01_pipeline/factorial.c -o build/prep/pipeline/factorial.raw.ll",
+      "command": "/usr/bin/clang-15 -S -emit-llvm -O0 -Xclang -disable-O0-optnone lab0/prep/01_pipeline/factorial.c -o lab0/build/prep/pipeline/factorial.raw.ll",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/opt-15 -S -passes=mem2reg build/prep/pipeline/factorial.raw.ll -o build/prep/pipeline/factorial.ssa.ll",
+      "command": "/usr/bin/opt-15 -S -passes=mem2reg lab0/build/prep/pipeline/factorial.raw.ll -o lab0/build/prep/pipeline/factorial.ssa.ll",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 build/prep/pipeline/factorial.raw.ll -o build/prep/pipeline/factorial_raw",
+      "command": "/usr/bin/clang-15 lab0/build/prep/pipeline/factorial.raw.ll -o lab0/build/prep/pipeline/factorial_raw",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 build/prep/pipeline/factorial.ssa.ll -o build/prep/pipeline/factorial_ssa",
+      "command": "/usr/bin/clang-15 lab0/build/prep/pipeline/factorial.ssa.ll -o lab0/build/prep/pipeline/factorial_ssa",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/readelf -h build/prep/pipeline/factorial.o",
+      "command": "/usr/bin/readelf -h lab0/build/prep/pipeline/factorial.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/nm -u build/prep/pipeline/factorial.o",
+      "command": "/usr/bin/nm -u lab0/build/prep/pipeline/factorial.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/readelf -r build/prep/pipeline/factorial.o",
+      "command": "/usr/bin/readelf -r lab0/build/prep/pipeline/factorial.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/objdump -dr build/prep/pipeline/factorial.o",
+      "command": "/usr/bin/objdump -dr lab0/build/prep/pipeline/factorial.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/objdump -d build/prep/pipeline/factorial",
+      "command": "/usr/bin/objdump -d lab0/build/prep/pipeline/factorial",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/readelf -h -l build/prep/pipeline/factorial",
+      "command": "/usr/bin/readelf -h -l lab0/build/prep/pipeline/factorial",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/readelf -h -l build/prep/pipeline/factorial_static",
+      "command": "/usr/bin/readelf -h -l lab0/build/prep/pipeline/factorial_static",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/readelf -SW build/prep/pipeline/factorial",
+      "command": "/usr/bin/readelf -SW lab0/build/prep/pipeline/factorial",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/readelf -SW build/prep/pipeline/factorial_no_debug",
+      "command": "/usr/bin/readelf -SW lab0/build/prep/pipeline/factorial_no_debug",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/size build/prep/pipeline/factorial build/prep/pipeline/factorial_O2 build/prep/pipeline/factorial_static",
+      "command": "/usr/bin/size lab0/build/prep/pipeline/factorial lab0/build/prep/pipeline/factorial_O2 lab0/build/prep/pipeline/factorial_static",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "-1\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "13\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "x\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial",
+      "command": "lab0/build/prep/pipeline/factorial",
       "stdin": "",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "-1\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "13\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "x\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_O2",
+      "command": "lab0/build/prep/pipeline/factorial_O2",
       "stdin": "",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "-1\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "13\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "x\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_static",
+      "command": "lab0/build/prep/pipeline/factorial_static",
       "stdin": "",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "-1\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "13\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "x\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_raw",
+      "command": "lab0/build/prep/pipeline/factorial_raw",
       "stdin": "",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "-1\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "13\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "x\n",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_ssa",
+      "command": "lab0/build/prep/pipeline/factorial_ssa",
       "stdin": "",
       "expected_returncode": 1,
       "returncode": 1
     },
     {
-      "command": "build/prep/pipeline/factorial_macro3",
+      "command": "lab0/build/prep/pipeline/factorial_macro3",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/nm -S --defined-only build/prep/pipeline/factorial",
+      "command": "/usr/bin/nm -S --defined-only lab0/build/prep/pipeline/factorial",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/nm -S --defined-only build/prep/pipeline/factorial_O2",
+      "command": "/usr/bin/nm -S --defined-only lab0/build/prep/pipeline/factorial_O2",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -fcommon -c build/prep/course_runtime/lib/sylib.c -o build/prep/equivalence/features/sylib_rv64.o",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -fcommon -c lab0/build/prep/course_runtime/lib/sylib.c -o lab0/build/prep/equivalence/features/sylib_rv64.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-ar rcs build/prep/equivalence/features/libsysy_riscv_compat.a build/prep/equivalence/features/sylib_rv64.o",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-ar rcs lab0/build/prep/equivalence/features/libsysy_riscv_compat.a lab0/build/prep/equivalence/features/sylib_rv64.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/llvm-as-15 prep/02_equivalence/features.ll -o build/prep/equivalence/features/features.bc",
+      "command": "/usr/bin/llvm-as-15 lab0/prep/02_equivalence/features.ll -o lab0/build/prep/equivalence/features/features.bc",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/opt-15 -passes=verify -disable-output build/prep/equivalence/features/features.bc",
+      "command": "/usr/bin/opt-15 -passes=verify -disable-output lab0/build/prep/equivalence/features/features.bc",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -x c -fcommon -include build/prep/course_runtime/lib/sylib.h -c prep/02_equivalence/features.sy -o build/prep/equivalence/features/reference.o",
+      "command": "/usr/bin/clang-15 -x c -fcommon -include lab0/build/prep/course_runtime/lib/sylib.h -c lab0/prep/02_equivalence/features.sy -o lab0/build/prep/equivalence/features/reference.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -no-pie build/prep/equivalence/features/reference.o build/prep/course_runtime/lib/libsysy_x86.a -o build/prep/equivalence/features/source_native",
+      "command": "/usr/bin/clang-15 -no-pie lab0/build/prep/equivalence/features/reference.o lab0/build/prep/course_runtime/lib/libsysy_x86.a -o lab0/build/prep/equivalence/features/source_native",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -no-pie prep/02_equivalence/features.ll build/prep/course_runtime/lib/libsysy_x86.a -o build/prep/equivalence/features/ir_native",
+      "command": "/usr/bin/clang-15 -no-pie lab0/prep/02_equivalence/features.ll lab0/build/prep/course_runtime/lib/libsysy_x86.a -o lab0/build/prep/equivalence/features/ir_native",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 prep/02_equivalence/features_rv64.s build/prep/equivalence/features/libsysy_riscv_compat.a -o build/prep/equivalence/features/asm_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 lab0/prep/02_equivalence/features_rv64.s lab0/build/prep/equivalence/features/libsysy_riscv_compat.a -o lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -x c -fcommon -include build/prep/course_runtime/lib/sylib.h -c prep/02_equivalence/features.sy -o build/prep/equivalence/features/source_rv64.o",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -x c -fcommon -include lab0/build/prep/course_runtime/lib/sylib.h -c lab0/prep/02_equivalence/features.sy -o lab0/build/prep/equivalence/features/source_rv64.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 build/prep/equivalence/features/source_rv64.o build/prep/equivalence/features/libsysy_riscv_compat.a -o build/prep/equivalence/features/source_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 lab0/build/prep/equivalence/features/source_rv64.o lab0/build/prep/equivalence/features/libsysy_riscv_compat.a -o lab0/build/prep/equivalence/features/source_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/llc-15 -mtriple=riscv64-unknown-elf -mattr=+m,+a,+f,+d,+c -target-abi=lp64d -code-model=medium prep/02_equivalence/features.ll -o build/prep/equivalence/features/ir_generated_rv64.s",
+      "command": "/usr/bin/llc-15 -mtriple=riscv64-unknown-elf -mattr=+m,+a,+f,+d,+c -target-abi=lp64d -code-model=medium lab0/prep/02_equivalence/features.ll -o lab0/build/prep/equivalence/features/ir_generated_rv64.s",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 build/prep/equivalence/features/ir_generated_rv64.s build/prep/equivalence/features/libsysy_riscv_compat.a -o build/prep/equivalence/features/ir_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 lab0/build/prep/equivalence/features/ir_generated_rv64.s lab0/build/prep/equivalence/features/libsysy_riscv_compat.a -o lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-readelf -h -A build/prep/equivalence/features/asm_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-readelf -h -A lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/source_native",
+      "command": "lab0/build/prep/equivalence/features/source_native",
       "stdin": "13\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/features/ir_native",
+      "command": "lab0/build/prep/equivalence/features/ir_native",
       "stdin": "13\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/asm_rv64",
       "stdin": "13\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/source_rv64",
       "stdin": "13\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "5\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "6\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "7\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "8\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "9\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "10\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "11\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "12\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/features/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/features/ir_rv64",
       "stdin": "13\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -fcommon -c build/prep/course_runtime/lib/sylib.c -o build/prep/equivalence/arrays_float/sylib_rv64.o",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -fcommon -c lab0/build/prep/course_runtime/lib/sylib.c -o lab0/build/prep/equivalence/arrays_float/sylib_rv64.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-ar rcs build/prep/equivalence/arrays_float/libsysy_riscv_compat.a build/prep/equivalence/arrays_float/sylib_rv64.o",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-ar rcs lab0/build/prep/equivalence/arrays_float/libsysy_riscv_compat.a lab0/build/prep/equivalence/arrays_float/sylib_rv64.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/llvm-as-15 prep/02_equivalence/arrays_float.ll -o build/prep/equivalence/arrays_float/arrays_float.bc",
+      "command": "/usr/bin/llvm-as-15 lab0/prep/02_equivalence/arrays_float.ll -o lab0/build/prep/equivalence/arrays_float/arrays_float.bc",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/opt-15 -passes=verify -disable-output build/prep/equivalence/arrays_float/arrays_float.bc",
+      "command": "/usr/bin/opt-15 -passes=verify -disable-output lab0/build/prep/equivalence/arrays_float/arrays_float.bc",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -x c -fcommon -include build/prep/course_runtime/lib/sylib.h -c prep/02_equivalence/arrays_float.sy -o build/prep/equivalence/arrays_float/reference.o",
+      "command": "/usr/bin/clang-15 -x c -fcommon -include lab0/build/prep/course_runtime/lib/sylib.h -c lab0/prep/02_equivalence/arrays_float.sy -o lab0/build/prep/equivalence/arrays_float/reference.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -no-pie build/prep/equivalence/arrays_float/reference.o build/prep/course_runtime/lib/libsysy_x86.a -o build/prep/equivalence/arrays_float/source_native",
+      "command": "/usr/bin/clang-15 -no-pie lab0/build/prep/equivalence/arrays_float/reference.o lab0/build/prep/course_runtime/lib/libsysy_x86.a -o lab0/build/prep/equivalence/arrays_float/source_native",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -no-pie prep/02_equivalence/arrays_float.ll build/prep/course_runtime/lib/libsysy_x86.a -o build/prep/equivalence/arrays_float/ir_native",
+      "command": "/usr/bin/clang-15 -no-pie lab0/prep/02_equivalence/arrays_float.ll lab0/build/prep/course_runtime/lib/libsysy_x86.a -o lab0/build/prep/equivalence/arrays_float/ir_native",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 prep/02_equivalence/arrays_float_rv64.s build/prep/equivalence/arrays_float/libsysy_riscv_compat.a -o build/prep/equivalence/arrays_float/asm_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 lab0/prep/02_equivalence/arrays_float_rv64.s lab0/build/prep/equivalence/arrays_float/libsysy_riscv_compat.a -o lab0/build/prep/equivalence/arrays_float/asm_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -x c -fcommon -include build/prep/course_runtime/lib/sylib.h -c prep/02_equivalence/arrays_float.sy -o build/prep/equivalence/arrays_float/source_rv64.o",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -x c -fcommon -include lab0/build/prep/course_runtime/lib/sylib.h -c lab0/prep/02_equivalence/arrays_float.sy -o lab0/build/prep/equivalence/arrays_float/source_rv64.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 build/prep/equivalence/arrays_float/source_rv64.o build/prep/equivalence/arrays_float/libsysy_riscv_compat.a -o build/prep/equivalence/arrays_float/source_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 lab0/build/prep/equivalence/arrays_float/source_rv64.o lab0/build/prep/equivalence/arrays_float/libsysy_riscv_compat.a -o lab0/build/prep/equivalence/arrays_float/source_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/llc-15 -mtriple=riscv64-unknown-elf -mattr=+m,+a,+f,+d,+c -target-abi=lp64d -code-model=medium prep/02_equivalence/arrays_float.ll -o build/prep/equivalence/arrays_float/ir_generated_rv64.s",
+      "command": "/usr/bin/llc-15 -mtriple=riscv64-unknown-elf -mattr=+m,+a,+f,+d,+c -target-abi=lp64d -code-model=medium lab0/prep/02_equivalence/arrays_float.ll -o lab0/build/prep/equivalence/arrays_float/ir_generated_rv64.s",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 build/prep/equivalence/arrays_float/ir_generated_rv64.s build/prep/equivalence/arrays_float/libsysy_riscv_compat.a -o build/prep/equivalence/arrays_float/ir_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 lab0/build/prep/equivalence/arrays_float/ir_generated_rv64.s lab0/build/prep/equivalence/arrays_float/libsysy_riscv_compat.a -o lab0/build/prep/equivalence/arrays_float/ir_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-readelf -h -A build/prep/equivalence/arrays_float/asm_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-readelf -h -A lab0/build/prep/equivalence/arrays_float/asm_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/arrays_float/source_native",
+      "command": "lab0/build/prep/equivalence/arrays_float/source_native",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/arrays_float/source_native",
+      "command": "lab0/build/prep/equivalence/arrays_float/source_native",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/arrays_float/source_native",
+      "command": "lab0/build/prep/equivalence/arrays_float/source_native",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/arrays_float/source_native",
+      "command": "lab0/build/prep/equivalence/arrays_float/source_native",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/arrays_float/ir_native",
+      "command": "lab0/build/prep/equivalence/arrays_float/ir_native",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/arrays_float/ir_native",
+      "command": "lab0/build/prep/equivalence/arrays_float/ir_native",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/arrays_float/ir_native",
+      "command": "lab0/build/prep/equivalence/arrays_float/ir_native",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/arrays_float/ir_native",
+      "command": "lab0/build/prep/equivalence/arrays_float/ir_native",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/asm_rv64",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/asm_rv64",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/asm_rv64",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/asm_rv64",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/source_rv64",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/source_rv64",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/source_rv64",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/source_rv64",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/ir_rv64",
       "stdin": "-1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/ir_rv64",
       "stdin": "0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/ir_rv64",
       "stdin": "1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/arrays_float/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/arrays_float/ir_rv64",
       "stdin": "2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -fcommon -c build/prep/course_runtime/lib/sylib.c -o build/prep/equivalence/numeric_edges/sylib_rv64.o",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -fcommon -c lab0/build/prep/course_runtime/lib/sylib.c -o lab0/build/prep/equivalence/numeric_edges/sylib_rv64.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-ar rcs build/prep/equivalence/numeric_edges/libsysy_riscv_compat.a build/prep/equivalence/numeric_edges/sylib_rv64.o",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-ar rcs lab0/build/prep/equivalence/numeric_edges/libsysy_riscv_compat.a lab0/build/prep/equivalence/numeric_edges/sylib_rv64.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/llvm-as-15 prep/02_equivalence/numeric_edges.ll -o build/prep/equivalence/numeric_edges/numeric_edges.bc",
+      "command": "/usr/bin/llvm-as-15 lab0/prep/02_equivalence/numeric_edges.ll -o lab0/build/prep/equivalence/numeric_edges/numeric_edges.bc",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/opt-15 -passes=verify -disable-output build/prep/equivalence/numeric_edges/numeric_edges.bc",
+      "command": "/usr/bin/opt-15 -passes=verify -disable-output lab0/build/prep/equivalence/numeric_edges/numeric_edges.bc",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -x c -fcommon -include build/prep/course_runtime/lib/sylib.h -c prep/02_equivalence/numeric_edges.sy -o build/prep/equivalence/numeric_edges/reference.o",
+      "command": "/usr/bin/clang-15 -x c -fcommon -include lab0/build/prep/course_runtime/lib/sylib.h -c lab0/prep/02_equivalence/numeric_edges.sy -o lab0/build/prep/equivalence/numeric_edges/reference.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -no-pie build/prep/equivalence/numeric_edges/reference.o build/prep/course_runtime/lib/libsysy_x86.a -o build/prep/equivalence/numeric_edges/source_native",
+      "command": "/usr/bin/clang-15 -no-pie lab0/build/prep/equivalence/numeric_edges/reference.o lab0/build/prep/course_runtime/lib/libsysy_x86.a -o lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 -no-pie prep/02_equivalence/numeric_edges.ll build/prep/course_runtime/lib/libsysy_x86.a -o build/prep/equivalence/numeric_edges/ir_native",
+      "command": "/usr/bin/clang-15 -no-pie lab0/prep/02_equivalence/numeric_edges.ll lab0/build/prep/course_runtime/lib/libsysy_x86.a -o lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 prep/02_equivalence/numeric_edges_rv64.s build/prep/equivalence/numeric_edges/libsysy_riscv_compat.a -o build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 lab0/prep/02_equivalence/numeric_edges_rv64.s lab0/build/prep/equivalence/numeric_edges/libsysy_riscv_compat.a -o lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -x c -fcommon -include build/prep/course_runtime/lib/sylib.h -c prep/02_equivalence/numeric_edges.sy -o build/prep/equivalence/numeric_edges/source_rv64.o",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -x c -fcommon -include lab0/build/prep/course_runtime/lib/sylib.h -c lab0/prep/02_equivalence/numeric_edges.sy -o lab0/build/prep/equivalence/numeric_edges/source_rv64.o",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 build/prep/equivalence/numeric_edges/source_rv64.o build/prep/equivalence/numeric_edges/libsysy_riscv_compat.a -o build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 lab0/build/prep/equivalence/numeric_edges/source_rv64.o lab0/build/prep/equivalence/numeric_edges/libsysy_riscv_compat.a -o lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/llc-15 -mtriple=riscv64-unknown-elf -mattr=+m,+a,+f,+d,+c -target-abi=lp64d -code-model=medium prep/02_equivalence/numeric_edges.ll -o build/prep/equivalence/numeric_edges/ir_generated_rv64.s",
+      "command": "/usr/bin/llc-15 -mtriple=riscv64-unknown-elf -mattr=+m,+a,+f,+d,+c -target-abi=lp64d -code-model=medium lab0/prep/02_equivalence/numeric_edges.ll -o lab0/build/prep/equivalence/numeric_edges/ir_generated_rv64.s",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 build/prep/equivalence/numeric_edges/ir_generated_rv64.s build/prep/equivalence/numeric_edges/libsysy_riscv_compat.a -o build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-gcc -march=rv64gc -mabi=lp64d -mcmodel=medany -static -Wl,--no-relax,-Ttext=0x90000000 lab0/build/prep/equivalence/numeric_edges/ir_generated_rv64.s lab0/build/prep/equivalence/numeric_edges/libsysy_riscv_compat.a -o lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-readelf -h -A build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "$HOME/.local/opt/riscv/toolchain-10.2.0/bin/riscv64-unknown-elf-readelf -h -A lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "-7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "-7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "0 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "-1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "12 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "-12 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "2 1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "5 0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "-13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "5 4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/source_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/source_native",
       "stdin": "5 -4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "-7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "-7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "0 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "-1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "12 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "-12 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "2 1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "5 0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "-13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "5 4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/equivalence/numeric_edges/ir_native",
+      "command": "lab0/build/prep/equivalence/numeric_edges/ir_native",
       "stdin": "5 -4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "-7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "-7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "0 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "-1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "12 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "-12 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "2 1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "5 0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "-13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "5 4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/asm_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/asm_rv64",
       "stdin": "5 -4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "-7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "-7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "0 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "-1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "12 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "-12 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "2 1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "5 0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "-13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "5 4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/source_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/source_rv64",
       "stdin": "5 -4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "-7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "-7 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "7 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "0 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "-1 2\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "12 -3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "-12 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "2 1\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "5 0\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "-13 3\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "5 4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/qemu-riscv64 build/prep/equivalence/numeric_edges/ir_rv64",
+      "command": "/usr/bin/qemu-riscv64 lab0/build/prep/equivalence/numeric_edges/ir_rv64",
       "stdin": "5 -4\n",
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/mlir-opt-15 prep/03_mlir/vecadd.mlir -o build/prep/mlir/01_structured.mlir",
+      "command": "/usr/bin/mlir-opt-15 lab0/prep/03_mlir/vecadd.mlir -o lab0/build/prep/mlir/01_structured.mlir",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/mlir-opt-15 build/prep/mlir/01_structured.mlir --convert-scf-to-cf -o build/prep/mlir/02_cfg.mlir",
+      "command": "/usr/bin/mlir-opt-15 lab0/build/prep/mlir/01_structured.mlir --convert-scf-to-cf -o lab0/build/prep/mlir/02_cfg.mlir",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/mlir-opt-15 build/prep/mlir/02_cfg.mlir --convert-memref-to-llvm --convert-arith-to-llvm --convert-func-to-llvm --convert-cf-to-llvm --reconcile-unrealized-casts -o build/prep/mlir/03_llvm_dialect.mlir",
+      "command": "/usr/bin/mlir-opt-15 lab0/build/prep/mlir/02_cfg.mlir --convert-memref-to-llvm --convert-arith-to-llvm --convert-func-to-llvm --convert-cf-to-llvm --reconcile-unrealized-casts -o lab0/build/prep/mlir/03_llvm_dialect.mlir",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/mlir-translate-15 --mlir-to-llvmir build/prep/mlir/03_llvm_dialect.mlir -o build/prep/mlir/04_vecadd.ll",
+      "command": "/usr/bin/mlir-translate-15 --mlir-to-llvmir lab0/build/prep/mlir/03_llvm_dialect.mlir -o lab0/build/prep/mlir/04_vecadd.ll",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/opt-15 -passes=verify -disable-output build/prep/mlir/04_vecadd.ll",
+      "command": "/usr/bin/opt-15 -passes=verify -disable-output lab0/build/prep/mlir/04_vecadd.ll",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "/usr/bin/clang-15 build/prep/mlir/04_vecadd.ll prep/03_mlir/check_vecadd.c -o build/prep/mlir/vecadd_native",
+      "command": "/usr/bin/clang-15 lab0/build/prep/mlir/04_vecadd.ll lab0/prep/03_mlir/check_vecadd.c -o lab0/build/prep/mlir/vecadd_native",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     },
     {
-      "command": "build/prep/mlir/vecadd_native",
+      "command": "lab0/build/prep/mlir/vecadd_native",
       "stdin": null,
       "expected_returncode": 0,
       "returncode": 0
     }
   ],
   "source_sha256": {
-    "prep/01_pipeline/factorial.c": "4841e168f81008a3037e37fed9895f7ad9322413a8f7b0af1f6a93671393bfdf",
-    "prep/01_pipeline/semantic_error.c": "125cf6ab59d152c3ce56c2e553bfeeff2f6c69983600d9167301bbb4c41d0ff4",
-    "prep/02_equivalence/arrays_float.ll": "6180936355df9ae95bb3a4166fe0fc2e8eb0a4054fa15ab2bed35e6ff6cd373a",
-    "prep/02_equivalence/arrays_float.sy": "167ef983b4956b57335268af1407564a4a068b698d3120b4122609d1c0182c5f",
-    "prep/02_equivalence/arrays_float_cases.json": "74a48d2125a94ec2faee5a16d77faf8294136ebdb2e7176cbdb8edea5ba1707c",
-    "prep/02_equivalence/arrays_float_rv64.s": "9e2aa82827ec1fb56c90ba7ff638e98c64da75ed5d6c02c1335108f293cde480",
-    "prep/02_equivalence/cases.json": "cc35fcd16151d2abc2a82a8e31e716b26762862bc7739ef1a6a8719ce8b543ea",
-    "prep/02_equivalence/features.ll": "c736be3245d25e1936f025a1becfd1cec55dcf6eebc3412047bcd565d4628ef5",
-    "prep/02_equivalence/features.sy": "21790f943b987d17fa33a11e69ece10f490dcc61651265d906785bb074e2d0d7",
-    "prep/02_equivalence/features_rv64.s": "6682684509790eb5e11b0c6f09cac80f55a755681b71e3ff3b3f229c28542dda",
-    "prep/02_equivalence/numeric_edges.ll": "2555fd8336293d298033b9f8e9d424055b425f69ebe341a476106fb0be41d2f0",
-    "prep/02_equivalence/numeric_edges.sy": "e758a61a569245c0af8fc429971f73de67103e55c70fac71ab4998ff93185c29",
-    "prep/02_equivalence/numeric_edges_cases.json": "f6f8453b468acc3ef5df46d40ffd653d5e44026b603c4c967d75e155191ace0d",
-    "prep/02_equivalence/numeric_edges_rv64.s": "4c07a6d97bd2559e42a3e8db969bf876dc9140abeaced222239a749452c0a6d6",
-    "prep/03_mlir/ascend_vecadd.mlir": "dc93518dea568d20918436dbb6eb6f5e26ca966c2d697cc6068f52db2a096c12",
-    "prep/03_mlir/check_vecadd.c": "e6fbbdab47d7cd1d43d725eaa6a2aad9b6879c2541890dbae93fddedd1ef2792",
-    "prep/03_mlir/vecadd.mlir": "ab6afd137eec88fe35194aa272854869735cdc74520e006b47346b4454fa6901",
-    "scripts/run_preparation.py": "c86e522ddeba6caa3599582b13676da7acca2c92b21bf15645c140abff8dc2e1"
+    "lab0/prep/01_pipeline/factorial.c": "4841e168f81008a3037e37fed9895f7ad9322413a8f7b0af1f6a93671393bfdf",
+    "lab0/prep/01_pipeline/semantic_error.c": "125cf6ab59d152c3ce56c2e553bfeeff2f6c69983600d9167301bbb4c41d0ff4",
+    "lab0/prep/02_equivalence/arrays_float.ll": "6180936355df9ae95bb3a4166fe0fc2e8eb0a4054fa15ab2bed35e6ff6cd373a",
+    "lab0/prep/02_equivalence/arrays_float.sy": "167ef983b4956b57335268af1407564a4a068b698d3120b4122609d1c0182c5f",
+    "lab0/prep/02_equivalence/arrays_float_cases.json": "74a48d2125a94ec2faee5a16d77faf8294136ebdb2e7176cbdb8edea5ba1707c",
+    "lab0/prep/02_equivalence/arrays_float_rv64.s": "9e2aa82827ec1fb56c90ba7ff638e98c64da75ed5d6c02c1335108f293cde480",
+    "lab0/prep/02_equivalence/cases.json": "cc35fcd16151d2abc2a82a8e31e716b26762862bc7739ef1a6a8719ce8b543ea",
+    "lab0/prep/02_equivalence/features.ll": "c736be3245d25e1936f025a1becfd1cec55dcf6eebc3412047bcd565d4628ef5",
+    "lab0/prep/02_equivalence/features.sy": "21790f943b987d17fa33a11e69ece10f490dcc61651265d906785bb074e2d0d7",
+    "lab0/prep/02_equivalence/features_rv64.s": "6682684509790eb5e11b0c6f09cac80f55a755681b71e3ff3b3f229c28542dda",
+    "lab0/prep/02_equivalence/numeric_edges.ll": "2555fd8336293d298033b9f8e9d424055b425f69ebe341a476106fb0be41d2f0",
+    "lab0/prep/02_equivalence/numeric_edges.sy": "e758a61a569245c0af8fc429971f73de67103e55c70fac71ab4998ff93185c29",
+    "lab0/prep/02_equivalence/numeric_edges_cases.json": "f6f8453b468acc3ef5df46d40ffd653d5e44026b603c4c967d75e155191ace0d",
+    "lab0/prep/02_equivalence/numeric_edges_rv64.s": "4c07a6d97bd2559e42a3e8db969bf876dc9140abeaced222239a749452c0a6d6",
+    "lab0/prep/03_mlir/ascend_vecadd.mlir": "dc93518dea568d20918436dbb6eb6f5e26ca966c2d697cc6068f52db2a096c12",
+    "lab0/prep/03_mlir/check_vecadd.c": "e6fbbdab47d7cd1d43d725eaa6a2aad9b6879c2541890dbae93fddedd1ef2792",
+    "lab0/prep/03_mlir/vecadd.mlir": "ab6afd137eec88fe35194aa272854869735cdc74520e006b47346b4454fa6901",
+    "lab0/scripts/run_preparation.py": "1491d618dfea16883dddf66f23ad49def850d9531d55ad06fb1e45627d691dd7"
   }
 }

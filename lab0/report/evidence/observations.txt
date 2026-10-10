@@ -60,8 +60,8 @@ int main ()
 
 
 === pipeline/factorial.raw.ll ===
-; ModuleID = 'prep/01_pipeline/factorial.c'
-source_filename = "prep/01_pipeline/factorial.c"
+; ModuleID = 'lab0/prep/01_pipeline/factorial.c'
+source_filename = "lab0/prep/01_pipeline/factorial.c"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
 
@@ -155,8 +155,8 @@ attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 
 
 === pipeline/factorial.ssa.ll ===
-; ModuleID = 'build/prep/pipeline/factorial.raw.ll'
-source_filename = "prep/01_pipeline/factorial.c"
+; ModuleID = 'lab0/build/prep/pipeline/factorial.raw.ll'
+source_filename = "lab0/prep/01_pipeline/factorial.c"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
 
@@ -240,7 +240,7 @@ attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 
 
 === pipeline/semantic_diagnostic.txt ===
-prep/01_pipeline/semantic_error.c:3:12: error: use of undeclared identifier 'missing_name'
+lab0/prep/01_pipeline/semantic_error.c:3:12: error: use of undeclared identifier 'missing_name'
     return missing_name;
            ^
 1 error generated.
@@ -248,15 +248,15 @@ prep/01_pipeline/semantic_error.c:3:12: error: use of undeclared identifier 'mis
 
 === pipeline/sizes.txt ===
    text	   data	    bss	    dec	    hex	filename
-   1823	    616	      8	   2447	    98f	build/prep/pipeline/factorial
-   1854	    616	      8	   2478	    9ae	build/prep/pipeline/factorial_O2
- 909728	  23232	  22632	 955592	  e94c8	build/prep/pipeline/factorial_static
+   1823	    616	      8	   2447	    98f	lab0/build/prep/pipeline/factorial
+   1854	    616	      8	   2478	    9ae	lab0/build/prep/pipeline/factorial_O2
+ 909728	  23232	  22632	 955592	  e94c8	lab0/build/prep/pipeline/factorial_static
 
 
 === pipeline/factorial_O0.s: factorial function ===
 factorial:
 .LFB0:
-	.file 1 "prep/01_pipeline/factorial.c"
+	.file 1 "lab0/prep/01_pipeline/factorial.c"
 	.loc 1 7 22
 	.cfi_startproc
 	endbr64
@@ -298,7 +298,7 @@ factorial:
 factorial:
 .LVL0:
 .LFB23:
-	.file 1 "prep/01_pipeline/factorial.c"
+	.file 1 "lab0/prep/01_pipeline/factorial.c"
 	.loc 1 7 22 view -0
 	.cfi_startproc
 	.loc 1 7 22 is_stmt 0 view .LVU1
@@ -352,7 +352,7 @@ factorial:
 
 === .rela.text relocations ===
 
-Relocation section '.rela.text' at offset 0x810 contains 6 entries:
+Relocation section '.rela.text' at offset 0x818 contains 6 entries:
   Offset          Info           Type           Sym. Value    Sym. Name + Addend
 00000000005b  000300000002 R_X86_64_PC32     0000000000000000 .rodata - 4
 000000000068  000b00000004 R_X86_64_PLT32    0000000000000000 __isoc99_scanf - 4
@@ -552,7 +552,7 @@ define void @_mlir_ciface_vecadd(ptr %0, ptr %1, ptr %2) !dbg !39 {
 !1 = !DIFile(filename: "LLVMDialectModule", directory: "/")
 !2 = !{i32 2, !"Debug Info Version", i32 3}
 !3 = distinct !DISubprogram(name: "vecadd", linkageName: "vecadd", scope: null, file: !4, line: 2, type: !5, scopeLine: 2, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !6)
-!4 = !DIFile(filename: "build/prep/mlir/03_llvm_dialect.mlir", directory: "/home/kyc/project/compile")
+!4 = !DIFile(filename: "lab0/build/prep/mlir/03_llvm_dialect.mlir", directory: "/home/kyc/project/compile")
 !5 = !DISubroutineType(types: !6)
 !6 = !{}
 !7 = !DILocation(line: 4, column: 10, scope: !8)

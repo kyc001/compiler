@@ -25,7 +25,7 @@ these custom dialects. BishengIR/CANN execution has not been performed here.
 With a configured BishengIR/CANN environment, the documented compilation is:
 
 ```sh
-bishengir-compile prep/03_mlir/ascend_vecadd.mlir -enable-hivm-compile -o kernel.o
+bishengir-compile lab0/prep/03_mlir/ascend_vecadd.mlir -enable-hivm-compile -o kernel.o
 ```
 
 The official host program then registers `kernel.o`, launches the kernel through
@@ -40,5 +40,5 @@ distinguishes the 96-byte logical UB payload from actual memory planning.
 The official host example prints expected/actual values but its comparison loop
 does not fail on a numeric mismatch; future device validation must add that check.
 Actual upstream rejection and local tool availability are retained in
-`report/evidence/ascend-probe.json`.
+`lab0/report/evidence/ascend-probe.json`.
 

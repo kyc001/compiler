@@ -1,17 +1,21 @@
 build/
 output/
+!lab0/output/
+lab0/output/*
+!lab0/output/pdf/
+lab0/output/pdf/*
+!lab0/output/pdf/preparation.pdf
 *Zone.Identifier
-# Local course handouts and supplied runtime binaries.
+# Original course handouts and local build artifacts.
 /materials/course/*
 !/materials/course/README.md
 /materials/templates/*
 !/materials/templates/README.md
-/runtime/lib.tar.gz
 __pycache__/
 *.pyc
-report/*.aux
-report/*.log
-report/*.out
-report/*.toc
-report/*.xdv
-report/*.synctex.gz
+/lab0/report/*.aux
+/lab0/report/*.log
+/lab0/report/*.out
+/lab0/report/*.toc
+/lab0/report/*.xdv
+/lab0/report/*.synctex.gz

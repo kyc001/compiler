@@ -14,10 +14,11 @@ import subprocess
 import sys
 import tarfile
 
-ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "build" / "prep"
-ARCHIVE = ROOT / "runtime" / "lib.tar.gz"
-EVIDENCE = ROOT / "report" / "evidence"
+ROOT = Path(__file__).resolve().parents[2]
+LAB0 = ROOT / "lab0"
+OUT = LAB0 / "build" / "prep"
+ARCHIVE = LAB0 / "runtime" / "lib.tar.gz"
+EVIDENCE = LAB0 / "report" / "evidence"
 COMMANDS = []
 
 
@@ -46,7 +47,7 @@ def require(name):
         candidates.extend(sorted((Path.home() / ".local/opt/riscv").glob(f"*/bin/{name}")))
         resolved = next((str(path) for path in candidates if path.is_file() and os.access(path, os.X_OK)), None)
     if not resolved:
-        raise RuntimeError(f"Missing tool: {name}; see README.md")
+        raise RuntimeError(f"Missing tool: {name}; see lab0/README.md")
     return resolved
 
 
@@ -70,7 +71,7 @@ def extract_runtime():
 def pipeline(clang, opt):
     out = OUT / "pipeline"
     out.mkdir(exist_ok=True)
-    src = ROOT / "prep/01_pipeline/factorial.c"
+    src = LAB0 / "prep/01_pipeline/factorial.c"
     run(["gcc", "-E", src, "-o", out / "factorial.i"])
     run(["gcc", "-E", "-DFIRST_FACTOR=3", src, "-o", out / "factorial_macro3.i"])
     run(["gcc", "-S", "-O0", "-g", out / "factorial.i", "-o", out / "factorial_O0.s"])
@@ -88,7 +89,7 @@ def pipeline(clang, opt):
     (out / "factorial.tokens.txt").write_text(tokens.stderr, encoding="utf-8")
     run([clang, "-fsyntax-only", "-Xclang", "-ast-dump", src],
         capture=out / "factorial.ast.txt")
-    diagnostic = run([clang, "-fsyntax-only", ROOT / "prep/01_pipeline/semantic_error.c"],
+    diagnostic = run([clang, "-fsyntax-only", LAB0 / "prep/01_pipeline/semantic_error.c"],
                      expected_returncode=1)
     if "undeclared identifier" not in diagnostic.stderr:
         raise RuntimeError("Expected an undeclared-identifier diagnostic")
@@ -146,7 +147,7 @@ def pipeline(clang, opt):
 def equivalence(clang, llvm_as, opt, llc, runtime, stem="features", case_file="cases.json"):
     out = OUT / "equivalence" / stem
     out.mkdir(parents=True, exist_ok=True)
-    src = ROOT / "prep/02_equivalence"
+    src = LAB0 / "prep/02_equivalence"
     header = runtime / "sylib.h"
     native_lib = runtime / "libsysy_x86.a"
     rvcc = require("riscv64-unknown-elf-gcc")
@@ -198,7 +199,7 @@ def mlir():
     translate = require("mlir-translate-15")
     out = OUT / "mlir"
     out.mkdir(exist_ok=True)
-    src = ROOT / "prep/03_mlir/vecadd.mlir"
+    src = LAB0 / "prep/03_mlir/vecadd.mlir"
     run([tool, src, "-o", out / "01_structured.mlir"])
     run([tool, out / "01_structured.mlir", "--convert-scf-to-cf", "-o", out / "02_cfg.mlir"])
     run([tool, out / "02_cfg.mlir", "--convert-memref-to-llvm", "--convert-arith-to-llvm",
@@ -206,7 +207,7 @@ def mlir():
          "-o", out / "03_llvm_dialect.mlir"])
     run([translate, "--mlir-to-llvmir", out / "03_llvm_dialect.mlir", "-o", out / "04_vecadd.ll"])
     run([require("opt-15"), "-passes=verify", "-disable-output", out / "04_vecadd.ll"])
-    run([require("clang-15"), out / "04_vecadd.ll", ROOT / "prep/03_mlir/check_vecadd.c",
+    run([require("clang-15"), out / "04_vecadd.ll", LAB0 / "prep/03_mlir/check_vecadd.c",
          "-o", out / "vecadd_native"])
     result = run([out / "vecadd_native"])
     return {"kind": "generic_mlir", "ascend_toolchain_executed": False,
@@ -223,10 +224,10 @@ def export_evidence(manifest):
                              if key not in ("stdout", "stderr")} for command in COMMANDS]
     evidence["source_sha256"] = {
         path.relative_to(ROOT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in sorted((ROOT / "prep").rglob("*"))
+        for path in sorted((LAB0 / "prep").rglob("*"))
         if path.is_file() and path.suffix in (".c", ".sy", ".ll", ".s", ".mlir", ".json")
     }
-    evidence["source_sha256"]["scripts/run_preparation.py"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    evidence["source_sha256"]["lab0/scripts/run_preparation.py"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     # Keep paths portable; the original absolute command log stays in build/prep.
     serialized = json.dumps(evidence, ensure_ascii=False, indent=2)
     serialized = serialized.replace(str(ROOT) + "/", "").replace(str(Path.home()), "$HOME")

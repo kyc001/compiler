@@ -4,8 +4,8 @@
 from pathlib import Path
 import shutil
 
-ROOT = Path(__file__).resolve().parents[1]
-TARGETS = ("build", "scripts/__pycache__", "tests/__pycache__")
+ROOT = Path(__file__).resolve().parents[2]
+TARGETS = ("build", "lab0/build", "lab0/scripts/__pycache__", "tests/__pycache__")
 
 
 def main():
@@ -18,7 +18,7 @@ def main():
                 raise RuntimeError(f"Expected a generated directory: {target}")
             shutil.rmtree(target)
             print(f"Removed {relative}/")
-    print("Kept sources, course materials, report/evidence/ and output/pdf/.")
+    print("Kept sources, local course materials, lab0/report/evidence/ and lab0/output/pdf/.")
 
 
 if __name__ == "__main__":

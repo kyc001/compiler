@@ -82,7 +82,7 @@ class LexerTests(unittest.TestCase):
 
     def test_real_program(self):
         root = Path(__file__).resolve().parents[1]
-        result, rows = self.scan((root / "prep/02_equivalence/features.sy").read_text())
+        result, rows = self.scan((root / "lab0/prep/02_equivalence/features.sy").read_text())
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("continue", [row[2] for row in rows])
         self.assertIn("&&", [row[2] for row in rows])
