@@ -4,9 +4,9 @@
   "output": "lab0/output/pdf/preparation.pdf",
   "template": "materials/templates/LaTeX模板.zip",
   "page_count": 14,
-  "compiled_at": "2026-10-10T10:43:09.840542+00:00",
-  "source_sha256": "4275ad59312ec38e175d5ff72f42e3bcf0cddcb7430043753e7199926b01d4b8",
-  "pdf_sha256": "e3ee0f9aa40e232a1cfa7bcf73257de85d4905e9c9d6023bd33206a3b781afd9",
+  "compiled_at": "2026-10-10T14:58:13.818529+00:00",
+  "source_sha256": "c3c9cd30e36165ef9fca79b9ffed6c799e70fadbf7e7690c91054cf5ecdd473e",
+  "pdf_sha256": "03b46f1ec93dc4d44bb454a2074d00b23d418bde621ba89ec23cb08edc3d294e",
   "checks": {
     "missing_glyphs": false,
     "overflow": false,
