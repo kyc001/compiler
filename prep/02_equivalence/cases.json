@@ -1,0 +1,18 @@
+[
+  {"input": "-1\n", "output": "-1\n"},
+  {"input": "0\n", "output": "1 0 0 7 111\n"},
+  {"input": "1\n", "output": "1 2 1 9 111\n"},
+  {"input": "2\n", "output": "2 4 3 11 111\n"},
+  {"input": "3\n", "output": "6 3 3 13 111\n"},
+  {"input": "4\n", "output": "24 5 7 15 111\n"},
+  {"input": "5\n", "output": "120 7 12 17 111\n"},
+  {"input": "6\n", "output": "720 6 18 19 111\n"},
+  {"input": "7\n", "output": "5040 8 25 21 111\n"},
+  {"input": "8\n", "output": "40320 10 33 23 111\n"},
+  {"input": "9\n", "output": "362880 9 33 25 111\n"},
+  {"input": "10\n", "output": "3628800 11 33 27 111\n"},
+  {"input": "11\n", "output": "39916800 13 33 29 111\n"},
+  {"input": "12\n", "output": "479001600 12 33 31 111\n"},
+  {"input": "13\n", "output": "-1\n"}
+]
+

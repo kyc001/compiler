@@ -1,0 +1,23 @@
+float weights[2][2] = {{1.5, 2.0}, {3.25, 4.0}};
+
+float row_sum(float values[][2], int row) {
+    return values[row][0] + values[row][1];
+}
+
+int main() {
+    int row = getint();
+    if (row < 0 || row >= 2) {
+        putint(-1);
+        putch(10);
+        return 0;
+    }
+    float sum = row_sum(weights, row);
+    int truncated = sum;
+    float result = sum + row;
+    putfloat(result);
+    putch(32);
+    putint(truncated);
+    putch(10);
+    return 0;
+}
+

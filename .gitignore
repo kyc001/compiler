@@ -1,0 +1,17 @@
+build/
+output/
+*Zone.Identifier
+# Local course handouts and supplied runtime binaries.
+/*.pdf
+/*.doc
+/*.pptx
+/lib.tar.gz
+__pycache__/
+*.pyc
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.xdv
+report/*.synctex.gz
+
