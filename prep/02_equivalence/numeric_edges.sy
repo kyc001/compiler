@@ -1,0 +1,50 @@
+// Small, bounded inputs isolate signed arithmetic and conversion semantics.
+int sumdown(int n) {
+    if (n == 0) return 0;
+    return n + sumdown(n - 1);
+}
+
+void update(int values[], int delta) {
+    values[1] = values[1] + delta;
+    values[2] = values[2] + values[0] - values[1];
+    return;
+}
+
+float calculate(float x) {
+    return ((-x / 2.0 - 0.25) + 1.0) * 2.0 / 4.0;
+}
+
+int main() {
+    int n = getint();
+    int d = getint();
+    if (n < -12 || n > 12 || d == 0 || d < -3 || d > 3) {
+        putint(-1);
+        putch(10);
+        return 0;
+    }
+    int values[3] = {n};
+    update(values, d);
+    int magnitude = n;
+    if (n < 0) magnitude = -n;
+    float x = n;
+    float y = calculate(x);
+    int truncated = y;
+    int negative;
+    if (y < 0.0) negative = 1;
+    else negative = 0;
+    putint(n / d);
+    putch(32);
+    putint(n % d);
+    putch(32);
+    putfloat(y);
+    putch(32);
+    putint(truncated);
+    putch(32);
+    putint(negative);
+    putch(32);
+    putint(sumdown(magnitude));
+    putch(32);
+    putint(values[0] + 2 * values[1] + 3 * values[2]);
+    putch(10);
+    return 0;
+}

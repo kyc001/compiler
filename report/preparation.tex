@@ -1,163 +1,535 @@
-\documentclass[UTF8,fontset=none,11pt,a4paper]{ctexart}
-\setCJKmainfont{Noto Serif CJK SC}
-\setCJKsansfont{Noto Sans CJK SC}
-\setCJKmonofont{Noto Sans Mono CJK SC}
-\usepackage[margin=2.3cm]{geometry}
-\usepackage{amsmath,booktabs,array,enumitem,listings,xcolor,xurl}
-\usepackage[hidelinks]{hyperref}
-\setlength{\parskip}{0.35em}
-\setlength{\emergencystretch}{2em}
-\setlist{nosep,leftmargin=2em}
+% -*- coding: utf-8 -*-
+% Adapted from the user-supplied LaTeX模板.zip, main.tex (designed by zcf).
+% Preserved: NKU cover, logo, margins, Chinese numbering, contents, headers, watermark.
+\documentclass[UTF8,a4paper,10pt,fontset=fandol]{ctexart}
+\usepackage[left=3.17cm,right=3.17cm,top=2.74cm,bottom=2.74cm]{geometry}
+\IfFileExists{NotoSerifCJK-Regular.ttc}{
+  \setCJKmainfont[FontIndex=2,BoldFont=NotoSerifCJK-Bold.ttc,
+    ItalicFont=NotoSansCJK-Regular.ttc]{NotoSerifCJK-Regular.ttc}
+  \setCJKsansfont[FontIndex=2,BoldFont=NotoSansCJK-Bold.ttc]{NotoSansCJK-Regular.ttc}
+}{
+  \IfFontExistsTF{Noto Serif CJK SC}{\setCJKmainfont{Noto Serif CJK SC}}{
+    \IfFileExists{C:/Windows/Fonts/simsun.ttc}{
+      \setCJKmainfont[FontIndex=0,AutoFakeBold=2]{C:/Windows/Fonts/simsun.ttc}
+    }{}
+  }
+}
+\usepackage{amsmath,amssymb,graphicx,booktabs,array,tabularx,enumitem}
+\usepackage{caption,float,xcolor,listings,xurl,fancyhdr,tikz,eso-pic,needspace}
+\usepackage[colorlinks,linkcolor=black,citecolor=black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={编译流程与多层中间表示实验报告},pdfauthor={柯云超；郑奕杰}}
+\graphicspath{{report/assets/}{assets/}}
+\ctexset{
+  section={name={,、},number=\chinese{section},format=\Large\bfseries\centering},
+  subsection={name={（,）},number=\chinese{subsection},format=\large\bfseries},
+  subsubsection={name={,.},number=\arabic{subsubsection},format=\normalsize\bfseries}
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\kaishu\leftmark}
+\fancyhead[R]{\small\kaishu 编译器课程预备实验报告}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\sectionmark}[1]{\markboth{\chinese{section}、#1}{}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\sihao}{\fontsize{14pt}{21pt}\selectfont}
+\newcommand{\watermark}{\AddToShipoutPictureBG{
+  \begin{tikzpicture}[remember picture,overlay]
+  \node[rotate=60,scale=10,text=gray!9] at (current page.center) {NKU};
+  \end{tikzpicture}}}
 \lstset{basicstyle=\ttfamily\small,breaklines=true,columns=fullflexible,
-  keepspaces=true,showstringspaces=false,frame=single,rulecolor=\color{black!25},
-  aboveskip=0.6em,belowskip=0.6em}
-\title{编译流程与中间表示实验报告}
-\author{}
-\date{2026年10月9日}
+  keepspaces=true,showstringspaces=false,numbers=left,numberstyle=\tiny\color{blue!50},
+  numbersep=6pt,xleftmargin=1.5em,frame=trbl,rulecolor=\color{black!25},
+  keywordstyle=\color{blue!70!black},commentstyle=\color{black!55},
+  aboveskip=0.7em,belowskip=0.7em}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\emergencystretch}{3em}
+\setlength{\parskip}{0.25em}
+\setlist{nosep,leftmargin=2em}
+\renewcommand{\arraystretch}{1.18}
 
 \begin{document}
-\maketitle
-\vspace{-2em}
-\noindent 成员一姓名与学号：\underline{\hspace{5cm}}\\
-成员一实际分工：\underline{\hspace{8cm}}\\
-成员二姓名与学号：\underline{\hspace{5cm}}\\
-成员二实际分工：\underline{\hspace{8cm}}
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\begin{center}
+  \includegraphics[width=0.8\textwidth]{NKU.png}\\[0.8cm]
+  {\Huge\kaishu\bfseries 南\quad 开\quad 大\quad 学}\\[0.65cm]
+  {\huge\kaishu\bfseries 计\ 算\ 机\ 学\ 院}\\[0.45cm]
+  {\Large\bfseries 编译器课程预备工作实验报告}\\[0.6cm]
+  \HRule\\[0.65cm]
+  {\LARGE\bfseries 编译流程与多层中间表示}\\[0.3cm]
+  {\Large SysY、LLVM IR、RISC-V 与 MLIR}\\[0.55cm]
+  \HRule\\[0.85cm]
+  {\Large\kaishu 柯云超\quad 2413575}\\[0.35cm]
+  {\Large\kaishu 郑奕杰\quad 2412677}\\[0.65cm]
+\end{center}
+\noindent\textbf{小组分工安排：}
+\begin{itemize}
+\item \textbf{柯云超：}负责实验总体方案与技术路线设计，主导 SysY、LLVM IR 和 RISC-V 汇编的核心实现与语义等价验证；完成 SSA 与优化效果分析、MLIR 逐层降低实验及 AscendNPU IR 调研，构建自动化验证流程，统筹报告的技术分析与结论论证。
+\item \textbf{郑奕杰：}负责阶乘样例的预处理、编译、汇编与链接基础实验，整理各阶段命令及输出；执行基础与边界用例，核对预期结果，协助整理实验环境说明、结果图表和参考资料。
+\item 共同工作：交叉检查实验代码、核对结果与引用，复核并提交同一份报告。
+\end{itemize}
+\vfill
+\begin{center}{\Large 2026年10月10日}\end{center}
+\end{titlepage}
 
+\hypersetup{pageanchor=true}
+\pagenumbering{Roman}
+\thispagestyle{plain}
+\renewcommand{\abstractname}{\kaishu\sihao\textbf{摘要}}
 \begin{abstract}
-本实验研究源程序经过预处理、编译、汇编和链接成为可执行程序的过程，并通过实际编程比较不同程序表示的语义。实验以阶乘程序观察 GCC 与 LLVM 的阶段输出，比较宏参数、优化选项、静态链接和 mem2reg 的影响；另外独立编写两组 SysY、LLVM IR 与 RISC-V64 汇编程序，连接课程运行库，验证整数运算、短路求值、作用域、数组和浮点数等特性。19 个输入用例在 5 条执行路径上完成 95 次比对，全部通过。进阶部分实测通用 MLIR 向量加的逐层 lowering 并执行其 LLVM IR，同时结合官方示例分析 AscendNPU IR 中 HFusion、HIVM 与 HACC 的分工。本实验没有执行毕昇专用工具链或在昇腾硬件上运行。
-\end{abstract}
+本实验以阶乘程序研究预处理、编译、汇编和链接的完整过程，观察宏替换、前端诊断、SSA 提升、机器指令、符号及重定位，并比较优化等级、调试选项与静态链接的影响。独立编写三组 SysY、LLVM IR 与 RISC-V64 等价程序，覆盖短路求值、作用域、数组、递归、整数除余及浮点运算与转换；34 个输入在五条执行路径上完成 170 次比对，全部通过，阶乘的五种构建结果另通过 85 次检查。进阶实验实测通用 MLIR 向量加的逐层降低，以三组输入／输出布局验证 12 个元素，并结合官方 VecAdd 分析 AscendNPU IR 的方言职责与数据依赖。结果表明，低层表示必须显式维护控制流、数据布局与调用约定，文件体积不能直接代表性能。Ascend 专用部分采用文档调研方式，未执行 BishengIR/CANN 或 NPU 程序。
+
+\medskip
 \noindent\textbf{关键词：}编译流程；SysY；LLVM IR；RISC-V；MLIR
+\end{abstract}
+\begingroup
+\small
+\setlength{\parskip}{0pt}
+\tableofcontents
+\endgroup
+\clearpage
+\pagenumbering{arabic}
+\watermark
 
 \section{引言}
-课程大作业需要实现 SysY 编译器。预备工作的目标是先理解各阶段的输入、输出和约束，能够独立用中间语言与目标汇编表达同一程序，再据此设计后续编译器模块。本实验关注三个问题：源程序的结构如何逐步转化为机器指令；类型、控制流和作用域在较低层表示中如何体现；怎样通过可重复实验检验表示之间的等价性。
+编译器将具有类型、作用域和结构化控制流的源程序转换为机器可执行代码。仅观察最终输出，难以区分前端检查、中端优化、后端生成以及汇编链接各自承担的工作。本实验围绕课程预备要求\cite{assignment}，以一个阶乘程序研究完整语言处理过程，再以三组 SysY 程序验证手写 LLVM IR 和 RISC-V 汇编的行为，最后探索 MLIR 多级表示。
 
-实验代码及自动化脚本保存在项目目录中。完整命令、工具版本、标准输出、标准错误和比对结果记录于 \texttt{build/prep/manifest.json}；下文中的数值均来自该实验记录。
+实验按“源程序或编译选项发生变化，阶段输出如何变化”的方法组织。基础概念结合实际输出说明，重点分析短路副作用、SSA、数组地址计算、浮点转换及多级降低。报告中的数据来自同一批自动化实验；保存的结果、命令和关键输出位于 \path{report/evidence/}，可通过 \texttt{make prep} 复现。测试验证给定输入上的一致性，不构成任意程序上的等价性证明。
 
-\section{实验环境与方法}
-实验在 Ubuntu 22.04 的 WSL 环境中完成，宿主机为 x86\_64。工具版本见表\ref{tab:tools}。目标程序使用 RV64GC 指令集和 LP64D 调用约定，RISC-V 程序通过 QEMU 用户模式执行。
-\begin{table}[htbp]
-\centering
+\section{实验环境与设计}
+\subsection{工具链和运行环境}
+实验在 Ubuntu 22.04 的 WSL 环境完成，宿主架构为 x86\_64。表\ref{tab:tools}列出实际使用的工具。RISC-V 程序以 QEMU 用户模式执行，使用 RV64GC 指令集和 LP64D ABI。
+\begin{table}[H]
+\centering\small
 \caption{实际使用的主要工具}\label{tab:tools}
-\begin{tabular}{ll}
+\begin{tabularx}{\textwidth}{lX}
 \toprule
-工具 & 版本或配置 \\
+工具或配置 & 版本或参数\\
 \midrule
-宿主 GCC & 12.3.0 \\
-Clang / LLVM / MLIR & 15.0.7 \\
-RISC-V GCC & SiFive GCC-Metal 10.2.0 \\
-QEMU 用户模式 & 6.2.0 \\
-目标架构与 ABI & RV64GC / LP64D \\
-目标链接方式 & static、medany、基址 \texttt{0x90000000} \\
+GCC & Ubuntu GCC 12.3.0\\
+Clang / LLVM / MLIR & 15.0.7\\
+RISC-V GCC & SiFive GCC-Metal 10.2.0\\
+QEMU 用户模式 & 6.2.0\\
+RISC-V 链接 & \texttt{-static -mcmodel=medany}\\
+地址与重定位选项 & \texttt{-Wl,--no-relax,-Ttext=0x90000000}\\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
-运行库来自课程提供的 \texttt{lib.tar.gz}。x86\_64 程序连接其中的 \texttt{libsysy\_x86.a}。预编译 RISC-V 库的 ISA 属性含有本机 GCC 10 链接器不识别的扩展标记，直接链接失败。因此依照讲义允许的方法，使用原始 \texttt{sylib.c} 以 \texttt{-march=rv64gc -mabi=lp64d -mcmodel=medany} 重建运行库，未修改其源码。C 参考程序强制包含课程头文件时使用 \texttt{-fcommon}，处理该头文件中计时全局变量的定义。运行库在标准错误上输出的计时信息单独保存，功能比对只比较标准输出。
+运行库来自课程提供的 \path{runtime/lib.tar.gz}\cite{runtime,guide}。宿主程序链接其中的 \texttt{libsysy\_x86.a}。预编译 RISC-V 库的 ISA 属性与本机 GCC 10 链接器不兼容，因此按讲义允许的方法，从未经修改的 \texttt{sylib.c} 重建兼容库。课程头文件定义了计时全局变量，C 参考程序采用 \texttt{-fcommon} 编译；标准错误上的运行库计时信息单独记录，功能输出按标准输出比较。
+
+\subsection{实验对象与验证口径}
+阶乘程序用于编译流程实验，合法输入为 $0\le n\le12$；$12!=479001600$ 仍在 32 位有符号整数范围内，$13!$ 越界，因此先检查范围。等价编程使用 \texttt{features}、\texttt{arrays\_float} 和 \texttt{numeric\_edges}，分别测试控制流、二维浮点数组及数值边界。通过强制包含课程头文件补充运行库声明，建立 C 编译器可处理的参考路径；它不依赖尚未实现完整功能的课程编译器。SysY 浮点字面量为 float，C 中无后缀字面量为 double；本实验选取二进制可精确表示的常量及有界输入，各浮点中间结果也可精确表示，使这一差异不影响所测结果，不能由此断言二者对任意源码兼容。
+
+预期值保存在独立用例文件中。每次执行同时检查退出码和标准输出，保留错误诊断；编译及运行失败会中止脚本。IR 先经过 LLVM verifier，随后才进入目标生成和执行。文件大小、函数符号大小与测试次数采用不同口径，避免将调试信息体积误当作指令数量。
 
 \section{完整编译流程实验}
-\subsection{预处理与宏参数}
-研究对象为带输入范围检查的阶乘程序，输入限制为 0 至 12，以避免 32 位有符号整数的阶乘溢出。主程序使用 \texttt{scanf} 和 \texttt{printf}，循环的起始因子由宏 \texttt{FIRST\_FACTOR} 指定。核心命令如下，输出保存在 \texttt{build/prep/pipeline/}。
-\begin{lstlisting}
+\subsection{程序与阶段输出}
+主程序用 \texttt{scanf} 读入并检查整数，调用阶乘函数后用 \texttt{printf} 输出。其核心代码如下：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=C]
+#ifndef FIRST_FACTOR
+#define FIRST_FACTOR 2
+#endif
+int factorial(int n) {
+    int result = 1;
+    int i = FIRST_FACTOR;
+    while (i <= n) {
+        result = result * i;
+        i = i + 1;
+    }
+    return result;
+}
+\end{lstlisting}
+\end{minipage}\par
+
+图\ref{fig:pipeline}说明处理过程，表\ref{tab:stages}对应可检查的产物。图中编译器内部各步骤是功能划分，具体工具可能将多个步骤融合实现。
+\begin{figure}[H]
+\centering
+\fbox{\begin{minipage}{0.95\textwidth}
+\centering\small
+源程序 \texttt{.c}
+$\xrightarrow{\text{预处理}}$ \texttt{.i}
+$\xrightarrow{\text{编译}}$ \texttt{.s}
+$\xrightarrow{\text{汇编}}$ \texttt{.o}
+$\xrightarrow{\text{链接}}$ 可执行文件\\[0.65em]
+编译器内部：Token $\rightarrow$ AST／语义检查 $\rightarrow$ IR／优化
+$\rightarrow$ 指令选择、寄存器分配及汇编输出
+\end{minipage}}
+\caption{语言处理系统及编译器内部的功能分工}\label{fig:pipeline}
+\end{figure}
+
+\begin{table}[H]
+\centering\small
+\caption{阶段、观察命令及对应信息}\label{tab:stages}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.2cm}>{\raggedright\arraybackslash}p{5.0cm}X}
+\toprule
+阶段 & 主要选项 & 观察内容\\
+\midrule
+预处理 & \texttt{gcc -E} & 宏与头文件展开、来源行标记\\
+词法 & \texttt{clang-15 -Xclang -dump-tokens} & Token 类型、文本及位置\\
+语法／语义 & \texttt{-Xclang -ast-dump}、\texttt{-fsyntax-only} & AST、类型与未声明标识符诊断\\
+中间代码 & \texttt{-fdump-tree-gimple}、\texttt{-emit-llvm} & 显式分支、基本块与数据操作\\
+优化／后端 & \texttt{opt-15 -passes=mem2reg}、\texttt{gcc -S} & SSA、指令和寄存器使用\\
+汇编 & \texttt{gcc -c}、\texttt{objdump -dr} & 机器码与重定位位置\\
+链接 & \texttt{gcc factorial.o -o factorial} & 符号解析、节布局与库依赖\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\Needspace{8\baselineskip}
+以下命令概括基本处理链；自动化脚本使用完整路径，并保留其参数\cite{gcc}。
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
 gcc -E factorial.c -o factorial.i
 gcc -S -O0 -g factorial.i -o factorial_O0.s
 gcc -c factorial_O0.s -o factorial.o
 gcc factorial.o -o factorial
 \end{lstlisting}
-预处理输出展开头文件声明、处理条件编译和宏替换，并保留来源行标记。将宏从默认值 2 改为 3 后，输入 5 的结果从 120 变为 60。这是预处理参数改变了程序计算的起点，明确说明宏替换发生在后续语法和语义处理之前。
+\end{minipage}\par
 
-\subsection{词法分析 语法分析与语义检查}
-Clang 的 \texttt{-Xclang -dump-tokens} 输出记号类型、文本和来源位置；\texttt{-Xclang -ast-dump} 输出函数、声明、循环、运算符等 AST 节点。GCC 的 original 和 GIMPLE 转储提供另一种观察程序结构的方式。Token 描述词法单元，AST 进一步表达嵌套关系和运算结构，两者的信息层次不同。
+\subsection{预处理、前端分析与语义错误}
+预处理器展开 \texttt{\#include} 和宏、处理条件编译，消除注释并输出来源行标记。本实验中 \texttt{FIRST\_FACTOR} 在 \texttt{.i} 中被替换为 2；添加 \texttt{-DFIRST\_FACTOR=3} 后变为 3。输入 5 时，默认程序计算 $2\times3\times4\times5=120$，修改后的程序输出 $3\times4\times5=60$。宏改变了后续编译器看到的程序，预处理器本身不负责类型检查或生成机器码。
 
-为观察语义检查，额外编译了语法结构完整、但返回未声明标识符 \texttt{missing\_name} 的程序。Clang 的 \texttt{-fsyntax-only} 返回非零状态并报告 \texttt{undeclared identifier}，表明语义约束会阻止非法程序进入代码生成阶段。诊断原文保存在 \texttt{semantic\_diagnostic.txt}。
+词法分析把 \texttt{while (i <= n)} 分解为关键字、括号、标识符和关系运算符等 Token，语法分析再建立 \texttt{WhileStmt}、条件表达式和循环体等 AST 节点。语义分析进一步完成名称绑定、类型检查和隐式转换。单独编译“返回未声明的 \texttt{missing\_name}”的函数时，Clang 报告 \texttt{use of undeclared identifier 'missing\_name'}，退出码为 1。程序的括号和语句结构合法仍不代表可以进入代码生成。
 
-\subsection{中间代码和 mem2reg}
-先使用 Clang 生成未启用 \texttt{optnone} 的 O0 LLVM IR，再单独运行 \texttt{opt-15 -passes=mem2reg}。整个模块中的 \texttt{alloca} 从 5 条减少到 1 条，优化后出现 3 条 \texttt{phi}。阶乘函数中的循环变量和累乘结果可转为 SSA 值；其循环头的关键结构为：
-\begin{lstlisting}
-%i = phi i32 [ 1, %entry ], [ %next.i, %body ]
-%result = phi i32 [ 1, %entry ], [ %product, %body ]
-%more = icmp sle i32 %i, %n
-br i1 %more, label %body, label %exit
+GCC 的 GIMPLE 输出把 \texttt{while} 改写为标签和跳转。实际转储中的核心语句为：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
+result = 1; i = 2;
+goto <D.2386>;
+<D.2387>:
+result = result * i;
+i = i + 1;
+<D.2386>:
+if (i <= n) goto <D.2387>; else goto <D.2385>;
 \end{lstlisting}
-这一代码片段取自独立编写的等价 IR，用具名变量展示相同的 SSA 机制。\texttt{phi} 根据控制流前驱选择初始化值或上一轮计算结果。main 中的输入变量把地址传给 \texttt{scanf}，不能由本次 mem2reg 简单提升，因此仍保留一条 \texttt{alloca}。由此可见，mem2reg 的适用性取决于变量地址的使用方式。
+\end{minipage}\par
+源语言的循环嵌套在此变为控制流关系，后续分析便可围绕基本块和数据依赖进行。
 
-另保存了 \texttt{-O0 -g} 与 \texttt{-O2 -g} 的汇编用于比较。汇编文本还包含调试信息，文本长度不能直接代表指令数或运行性能；本实验不据此宣称获得性能提升。
+\subsection{LLVM IR 与 SSA 提升}
+使用 \texttt{-O0 -Xclang -disable-O0-optnone} 生成 LLVM IR，再单独执行 \texttt{mem2reg}，以隔离这一变换。禁用 \texttt{optnone} 是为了允许优化 pass 处理 O0 函数\cite{llvm}。
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
+clang-15 -S -emit-llvm -O0 -Xclang -disable-O0-optnone \
+  factorial.c -o factorial.raw.ll
+opt-15 -S -passes=mem2reg factorial.raw.ll \
+  -o factorial.ssa.ll
+\end{lstlisting}
+\end{minipage}\par
+整个模块的 \texttt{alloca} 从 5 条降为 1 条，出现 3 条 \texttt{phi}。其中两条处理阶乘循环的累乘值和循环变量，另一条合并 main 的返回值。实际优化结果中的循环头如下，数值标签和变量名与转储一致：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
+2:  ; predecessors: %4, %1
+  %.01 = phi i32 [ 1, %1 ], [ %5, %4 ]
+  %.0 = phi i32 [ 2, %1 ], [ %6, %4 ]
+  %3 = icmp sle i32 %.0, %0
+  br i1 %3, label %4, label %7
+\end{lstlisting}
+\end{minipage}\par
+\texttt{phi} 根据控制流前驱选择初始值或上轮结果，使每个 SSA 名只定义一次。main 的输入变量要将地址传给 \texttt{scanf}，无法由本次 pass 提升，故保留一条 \texttt{alloca}。这里的 IR 变量并非已经分配好的物理寄存器，后端仍须选择指令并决定哪些值驻留寄存器、哪些值溢出到栈。
 
-\subsection{汇编器和链接器}
-汇编器把汇编指令及伪指令转换为目标文件中的机器码、节、符号和重定位记录。\texttt{readelf -h} 显示 \texttt{factorial.o} 为可重定位文件；\texttt{nm -u} 列出尚未解析的 \texttt{printf}、\texttt{\_\_isoc99\_scanf} 和 \texttt{\_\_stack\_chk\_fail} 等符号。\texttt{objdump -dr} 同时显示机器指令和重定位位置，说明目标文件尚未具备最终执行布局。
+\subsection{优化等级与调试选项的对照}
+在 O0 的阶乘函数中，\texttt{result}、\texttt{i} 和 \texttt{n} 分别经 \texttt{-8(\%rbp)}、\texttt{-4(\%rbp)} 和 \texttt{-20(\%rbp)} 访问。O2 的核心循环如下：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
+.L3:
+  imull %eax, %edx
+  addl  $1, %eax
+  cmpl  %edi, %eax
+  jne   .L3
+\end{lstlisting}
+\end{minipage}\par
+O2 将循环值保存在寄存器中，并将边界整理为与 $n+1$ 比较；调试指令 \texttt{.loc} 仍用于关联源代码。用 \texttt{nm -S} 读取函数符号大小，用文件元数据读取整个可执行文件大小，结果见表\ref{tab:options}。
 
-链接器组合程序、启动代码和库，解析符号并处理重定位，产生可执行文件。实验分别生成默认链接和 \texttt{-static} 链接的程序，两者输入 5 均输出 120。静态程序包含更多库代码，文件明显较大；\texttt{readelf -l} 的结果可用于观察动态解释器与装载段的差异。
-
-\section{SysY LLVM IR 与 RISC-V 等价编程}
-\subsection{基础程序的语义覆盖}
-\texttt{features.sy} 由全局常量、全局变量、多个函数和 main 组成。各函数的功能与可观察结果见表\ref{tab:coverage}。
-\begin{table}[htbp]
-\centering
-\caption{基础程序的语义覆盖}\label{tab:coverage}
-\begin{tabular}{p{2.2cm}p{5.0cm}p{4.4cm}}
+\begin{table}[H]
+\centering\small
+\caption{同一源码的选项对照；大小单位为字节}\label{tab:options}
+\begin{tabular}{lrrc}
 \toprule
-函数 & 覆盖的特性 & 可观察结果 \\
+构建方式 & 可执行文件大小 & factorial 符号大小 & 含 \texttt{.debug\_info}\\
 \midrule
-factorial & while、赋值、乘法、比较、返回 & $n!$ \\
-arithmetic & 单目正负、加乘除模 & $n+(n\bmod 3)$ \\
-control & if、break、continue & 跳过 3，遇到 9 停止累加 \\
-scope & 嵌套块、常量、同名变量隐藏 & $2n+7$ \\
-logic & 比较、逻辑非、短路、全局副作用 & 合法输入时为 111 \\
+O0、带 \texttt{-g} & 17\,704 & 54 & 是\\
+O0、不带 \texttt{-g} & 16\,104 & --- & 否\\
+O2、带 \texttt{-g} & 18\,768 & 56 & 是\\
+O0、带 \texttt{-g}、静态链接 & 1\,035\,896 & --- & 是\\
 \bottomrule
 \end{tabular}
 \end{table}
+O2 改善了循环的寄存器使用，但其函数大小略增，程序文件也更大；指令布局、对齐与调试信息都会影响体积。因此，不能从文件更小推断程序更快，也不能从 O2 名称推断本实验测得了加速。本实验未进行可信的性能计时，结论限于实际观察到的结构变化。
 
-logic 中的 \texttt{bump()} 会修改全局计数器。表达式 \texttt{(n > 0 \&\& bump() != 0) || bump() != 0} 可以区分正确短路求值与错误的提前求值。对正数，左侧为真时不应执行右侧调用；对 0，逻辑与应跳过左侧的函数调用，再执行逻辑或右侧。把条件简单编译成无条件计算两个操作数，会改变计数器并导致测试失败。
+O0、O2、静态链接、原始 LLVM IR 和 mem2reg 后 IR 五种程序，分别验证 $0,\ldots,12$、$-1$、13、非数字输入与空输入，共 $17\times5=85$ 次检查，全部通过。非法输入无标准输出且返回 1，合法输入输出对应阶乘。另行验证宏修改后的结果为 60，避免把有意改变语义的变体纳入等价结论。
 
-独立 IR 通过基本块与条件 \texttt{br} 表达这些路径，而不是无条件计算有副作用的操作数。块作用域中的同名源变量映射为不同的值；它们的词法作用域不能与 LLVM 基本块混为一谈。
+\subsection{汇编、符号与链接}
+汇编器把目标相关汇编转换为机器码，建立节、符号表和重定位记录。\texttt{readelf -h} 显示 \texttt{factorial.o} 为 REL 类型；\texttt{nm -u} 显示尚未解析的 \texttt{printf}、\texttt{\_\_isoc99\_scanf} 和 \texttt{\_\_stack\_chk\_fail}。最后一个符号源于本机 GCC 默认栈保护，与源码显式调用无关。
 
-\subsection{RISC-V 表示和调用约定}
-手写汇编用 \texttt{a0} 传递整数参数和返回值，跨函数调用需要保留的值放入 \texttt{s0} 等被调用者保存寄存器。非叶函数保存 \texttt{ra} 和使用的保存寄存器，栈帧始终保持 16 字节对齐。整数计算使用 \texttt{addw}、\texttt{mulw}、\texttt{divw}、\texttt{remw} 等 32 位操作。全局对象用 \texttt{la} 寻址，并配合 medany 和讲义给出的链接参数运行。
+\texttt{readelf -r} 中，\texttt{.rela.text} 内偏移 \texttt{0x68} 和 \texttt{0xa3} 分别存在指向输入和输出函数的 \texttt{R\_X86\_64\_PLT32} 重定位。汇编器已知道指令形式，但外部符号最终地址仍需链接器和动态装载机制处理。链接器组合目标文件、启动代码及库，解析符号、安排节并修正引用。默认链接程序带有动态解释器段；静态程序将所需库代码纳入文件，体积约为默认程序的 58.5 倍。两者在本实验输入上的输出一致，但依赖方式和产物布局不同。
 
-\subsection{数组 浮点数和隐式转换}
-\texttt{arrays\_float.sy} 定义二维浮点数组，并通过形参 \texttt{float values[][2]} 传递数组。LLVM IR 使用 \texttt{getelementptr} 计算元素地址；RISC-V 程序按每行 8 字节计算偏移。浮点参数与返回值使用 LP64D 的 \texttt{fa0}，加法使用 \texttt{fadd.s}。
+\section{SysY、LLVM IR 与 RISC-V 等价编程}
+\subsection{样例设计与语言特性}
+按 SysY 定义及文法补充\cite{sysy}，独立编写三组源程序、LLVM IR 和 RISC-V 汇编。手写 IR 与手写汇编保存在 \path{prep/02_equivalence/}，与工具自动生成的文件分开，便于检查表示之间的对应关系。表\ref{tab:coverage}列出覆盖情况。
+\begin{table}[H]
+\centering\small
+\caption{样例功能与语义覆盖}\label{tab:coverage}
+\begin{tabularx}{\textwidth}{p{2.3cm}X p{3.1cm}}
+\toprule
+函数／样例 & 覆盖特性 & 可观察结果\\
+\midrule
+factorial & while、赋值、乘法、比较、返回 & $n!$\\
+arithmetic & 单目正负、加乘除模 & $n+(n\bmod3)$\\
+control & if、break、continue & 跳过 3，遇 9 停止累加\\
+scope & 嵌套块、常量、同名变量隐藏 & $2n+7$\\
+logic & 逻辑与或非、短路、全局副作用 & 合法输入时为 111\\
+arrays\_float & 二维数组、数组形参、浮点加法、隐式转换 & 行求和、截断与混合运算\\
+numeric\_edges & 负数除余、浮点四则与比较、递归、void 函数、局部数组补零与写入 & 商余、舍入、递归和、数组校验值\\
+\bottomrule
+\end{tabularx}
+\end{table}
 
-源程序把浮点和赋给整数，使用 LLVM \texttt{fptosi} 和 RISC-V \texttt{fcvt.w.s ..., rtz} 实现向零截断；整数参与浮点加法时使用 \texttt{sitofp} 或 \texttt{fcvt.s.w}。课程实际运行库的 \texttt{putfloat} 使用十六进制浮点格式，因此输入行号 0 和 1 的输出分别为 \texttt{0x1.cp+1 3} 和 \texttt{0x1.08p+3 7}。
+\subsection{控制流、短路与作用域}
+\texttt{logic} 用 \texttt{bump()} 对全局计数器加一，使求值次数可以观察：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=C]
+if ((n > 0 && bump() != 0) || bump() != 0)
+    calls = calls + 10;
+if (!(n < 0) && (n >= 0 || bump() != 0))
+    calls = calls + 100;
+\end{lstlisting}
+\end{minipage}\par
+对正数，第一次条件只执行左侧 \texttt{bump}；对 0，逻辑与跳过左侧调用，再执行逻辑或右侧。第二个条件在合法输入上不执行 \texttt{bump}，因此结果为 $1+10+100=111$。LLVM IR 通过条件 \texttt{br} 把函数调用放在对应路径中，汇编采用条件跳转实现同一控制流；若无条件计算逻辑运算的两个操作数，计数器就会暴露错误。
 
-\subsection{验证方法与结果}
-基础程序测试 $-1,0,1,\ldots,12,13$，进阶程序测试 $-1,0,1,2$。越界输入输出 $-1$，避免非法数组访问或阶乘溢出。期望输出保存在独立的 JSON 用例文件中，运行结果逐字节比较，同时检查退出状态。
+循环中的 \texttt{continue} 跳向下一次条件判断，\texttt{break} 跳到出口。LLVM 的 \texttt{phi} 在循环头合并不同前驱的循环变量和累计值。块作用域的同名变量则在名称解析后对应不同值：内层 \texttt{x=7} 不覆盖外层 \texttt{x=n} 的存储含义，故 \texttt{scope(n)} 返回 $2n+7$。词法作用域与基本块属于不同层次，不能用基本块边界替代作用域管理。
 
-每个用例验证五条路径：宿主 C 参考编译、宿主独立 LLVM IR、手写 RISC-V 汇编、源程序交叉编译、独立 IR 经 llc 生成 RISC-V 汇编。共 $(15+4)\times5=95$ 次比对，全部通过。例如基础程序输入 5 时，五条路径均输出 \texttt{120 7 12 17 111}。
+\Needspace{20\baselineskip}
+\subsection{整数语义与 RISC-V 调用约定}
+SysY 整数使用 32 位表示，手写 IR 采用 \texttt{i32}、\texttt{sdiv} 和 \texttt{srem}；RV64 汇编使用 \texttt{addw}、\texttt{mulw}、\texttt{divw} 和 \texttt{remw} 保持相应整数运算宽度。阶乘在手写汇编中的核心为：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
+    li t0, 1
+    li t1, 1
+.Lfactorial_loop:
+    bgt t1, a0, .Lfactorial_exit
+    mulw t0, t0, t1
+    addiw t1, t1, 1
+    j .Lfactorial_loop
+.Lfactorial_exit:
+    mv a0, t0
+    ret
+\end{lstlisting}
+\end{minipage}\par
+整数参数和返回值使用 \texttt{a0} 等参数寄存器；跨调用要保存的值放入 \texttt{s0} 等被调用者保存寄存器。非叶函数保存 \texttt{ra} 与实际使用的保存寄存器，栈保持 16 字节对齐。浮点参数和返回值遵循 LP64D，使用 \texttt{fa0} 等寄存器\cite{riscv}。正确的局部指令序列若破坏调用约定，仍可能在运行库调用后出现错误。
 
-这些测试验证的是给定程序和输入集合上的一致性，不能替代对所有合法 SysY 程序的正确性证明，也不表示大作业编译器已经实现。
+\subsection{数组地址与浮点转换}
+数组样例定义 \texttt{weights[2][2]=\{\{1.5,2.0\},\{3.25,4.0\}\}}，通过形参 \texttt{float values[][2]} 传入行求和函数。元素 \texttt{values[row][col]} 的字节偏移为
+\[
+  \operatorname{offset}=4(2\,row+col),
+\]
+因为每个单精度元素占 4 字节、每行两个元素。LLVM IR 用 \texttt{getelementptr} 按类型计算地址；手写汇编将行号乘 8，再用 \texttt{flw} 读取两列并以 \texttt{fadd.s} 相加。
+
+浮点和赋给整数时，LLVM 使用 \texttt{fptosi}，汇编使用带向零舍入模式的 \texttt{fcvt.w.s ..., rtz}。整数行号参与浮点加法时，分别使用 \texttt{sitofp} 和 \texttt{fcvt.s.w}。两行的和为 3.5 与 7.25，截断后为 3 与 7；加入行号后输出浮点值 3.5 与 8.25。课程运行库的 \texttt{putfloat} 以十六进制浮点格式打印，分别对应 \texttt{0x1.cp+1} 与 \texttt{0x1.08p+3}。这种输出格式是运行库约定，不是数值计算错误。
+
+以下为手写 \texttt{row\_sum} 的 LLVM IR 主体；它对应源码的 \texttt{values[row][0]+values[row][1]}，没有省略实际的数组读取：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
+%index = sext i32 %row to i64
+%left.ptr = getelementptr [2 x float], ptr %values, i64 %index, i64 0
+%right.ptr = getelementptr [2 x float], ptr %values, i64 %index, i64 1
+%left = load float, ptr %left.ptr, align 4
+%right = load float, ptr %right.ptr, align 4
+%sum = fadd float %left, %right
+ret float %sum
+\end{lstlisting}
+\end{minipage}\par
+\texttt{getelementptr} 只计算地址，\texttt{load} 才读取元素。形参首维退化为指针，故 GEP 的源元素类型是“一行”的 \texttt{[2 x float]}。汇编用 \texttt{slli t0,a1,3} 计算行偏移，两个 \texttt{flw} 访问偏移 0 和 4，\texttt{fadd.s} 将结果放入 \texttt{fa0} 返回；三种表示因此具有相同的行跨度、元素宽度和返回类型。
+
+\subsection{负数运算、递归与数组写入的补充验证}
+只使用非负数不能区分向零取整与向下取整。\texttt{numeric\_edges} 读取 $n,d$，限制 $-12\le n\le12$、$1\le|d|\le3$，在除法之前拒绝零除数和越界值。按语言规则，$q=\operatorname{trunc}(n/d)$、$r=n-qd$；因此 $-7/3=-2$、$-7\bmod3=-1$，而 $7/(-3)=-2$、$7\bmod(-3)=1$。若测试预期直接采用 Python 的 \texttt{//} 和 \texttt{\%}，会误用向下取整规则。本实验在独立 JSON 中显式保存这些预期值。
+
+浮点函数计算 $y=(((-x/2)-0.25)+1)\times2/4$，其中 $x$ 由 $n$ 转换而来。手写 IR 依次使用 \texttt{fneg/fdiv/fsub/fadd/fmul/fdiv}，汇编使用对应单精度指令；$n=7$ 时 $y=-1.375$，转为整数应为 $-1$。另外以浮点小于比较输出符号标记。递归函数计算 $S(k)=k+S(k-1)$、$S(0)=0$，令 $k=|n|$，检查多层调用时返回地址和保存寄存器是否保持正确。
+
+局部数组声明为 \texttt{int values[3]=\{n\}}，后两个元素必须补零；\texttt{void update(int values[],int delta)} 通过数组形参读写后，数组应为 $(n,d,n-d)$。输出加权校验值 $v_0+2v_1+3v_2=4n-d$，使缺失初始化或错误写入更易被观察。该样例共有 15 个输入，包括商余的四种符号组合、递归基例、正负范围端点和五个非法输入。
+
+\subsection{链接路径及结果}
+五条路径在每个用例上分别执行，结果见表\ref{tab:results}。其中“源程序”路径将本实验 SysY 子集按 C 语法编译；“独立 IR”路径使用手写 \texttt{.ll}；“手写汇编”路径直接汇编链接。
+\begin{table}[H]
+\centering\small
+\caption{五条执行路径的等价比对结果}\label{tab:results}
+\begin{tabularx}{\textwidth}{Xcccc}
+\toprule
+执行路径 & 控制流 & 数组 & 数值边界 & 合计\\
+\midrule
+源程序 $\rightarrow$ Clang $\rightarrow$ 宿主程序 & 15/15 & 4/4 & 15/15 & 34/34\\
+独立 IR $\rightarrow$ Clang $\rightarrow$ 宿主程序 & 15/15 & 4/4 & 15/15 & 34/34\\
+手写汇编 $\rightarrow$ 交叉链接 $\rightarrow$ QEMU & 15/15 & 4/4 & 15/15 & 34/34\\
+源程序 $\rightarrow$ RISC-V GCC $\rightarrow$ QEMU & 15/15 & 4/4 & 15/15 & 34/34\\
+独立 IR $\rightarrow$ llc $\rightarrow$ 链接 $\rightarrow$ QEMU & 15/15 & 4/4 & 15/15 & 34/34\\
+\midrule
+全部 & 75/75 & 20/20 & 75/75 & 170/170\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\texttt{features} 输入 $-1,0,\ldots,12,13$；\texttt{arrays\_float} 输入 $-1,0,1,2$。越界输入输出 \texttt{-1}，且在乘法或数组访存之前退出。典型输出见表\ref{tab:examples}，每个单元格对应一行标准输出。
+\begin{table}[H]
+\centering\small
+\caption{代表性输入与五条路径一致的输出}\label{tab:examples}
+\begin{tabular}{lll}
+\toprule
+样例 & 输入 & 输出\\
+\midrule
+features & 0 & \texttt{1 0 0 7 111}\\
+features & 5 & \texttt{120 7 12 17 111}\\
+features & 12 & \texttt{479001600 12 33 31 111}\\
+features & 13 & \texttt{-1}\\
+arrays\_float & 0 & \texttt{0x1.cp+1 3}\\
+arrays\_float & 1 & \texttt{0x1.08p+3 7}\\
+arrays\_float & 2 & \texttt{-1}\\
+\bottomrule
+\end{tabular}
+\end{table}
+数值边界样例按“商、余数、浮点结果、截断值、负数标记、递归和、数组校验值”输出。例如输入 \texttt{7 -3} 得到 \texttt{-2 1 -0x1.6p+0 -1 1 28 31}。所有路径都链接课程 SysY 运行库，退出码均为 0；非法输入按样例约定输出 \texttt{-1}。测试覆盖三组程序的正常路径和边界，尚未穷举全部 SysY 语法、NaN／无穷值或任意浮点输入；本实验也不将整数溢出、除零或越界访存作为合法算术结果比较。
 
 \section{MLIR 与 AscendNPU IR 探索}
-\subsection{通用 MLIR lowering 实测}
-本地实验用四元素浮点向量加演示逐层降低，保留每一层输出：
-\begin{enumerate}
-\item 起始表示包含 \texttt{scf.for}、\texttt{arith.addf} 和 \texttt{memref.load/store}。
-\item \texttt{convert-scf-to-cf} 将结构化循环转为显式基本块、块参数和条件跳转。
-\item 分别转换 MemRef、Arith、Func 与 CF，得到 LLVM 方言；MemRef 被降低为包含指针、偏移、维度和步长的描述信息。
-\item \texttt{mlir-translate-15 --mlir-to-llvmir} 输出 LLVM IR，使用 LLVM verifier 验证，再与 C 测试程序编译链接。
-\end{enumerate}
-测试通过生成的 C 接口传入 MemRef 描述符，逐个检查四个结果，得到 1.5、4.5、7.5、10.5。该实验展示通用方言的语义保持转换，未使用 Ascend 专用方言。
+\subsection{通用 VecAdd 的逐层降低}
+MLIR 允许在同一框架中保留不同抽象层级的操作和类型，并通过转换 pass 逐步引入目标约束\cite{mlir}。本地设计四元素单精度向量加，起始表示含 \texttt{scf.for}、\texttt{arith.addf} 及 \texttt{memref.load/store}。输入
+\[
+a=(1,2,3,4),\qquad b=(0.5,2.5,4.5,6.5),
+\]
+期望输出为 $(1.5,4.5,7.5,10.5)$。
 
-\subsection{官方 VecAdd 与昇腾方言分析}
-进一步阅读课程 AscendNPU-IR 课件及官方 VecAdd 示例\cite{ascend}。官方示例以 16 元素 \texttt{i16} 向量为对象，输入输出处于 GM 地址空间；两个 \texttt{hivm.hir.load} 把输入搬入 UB，\texttt{hivm.hir.vadd} 计算后，由 \texttt{hivm.hir.store} 写回 GM。\texttt{hacc.entry} 与 DEVICE 属性标明设备端入口。
+\texttt{convert-scf-to-cf} 将结构化循环转换为显式控制流，实际输出的循环头如下：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
+cf.br ^bb1(%c0 : index)
+^bb1(%0: index):
+  %1 = arith.cmpi slt, %0, %c4 : index
+  cf.cond_br %1, ^bb2, ^bb3
+\end{lstlisting}
+\end{minipage}\par
+循环变量成为块参数，回边通过 \texttt{cf.br} 传入更新值；其数据流作用对应 LLVM 中 \texttt{phi} 的合并机制。后续转换将 MemRef、Arith、Func 和 CF 依次降至 LLVM 方言，并消除转换过程中遗留的类型桥接操作。核心命令为：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
+mlir-opt-15 01_structured.mlir --convert-scf-to-cf \
+  -o 02_cfg.mlir
+mlir-opt-15 02_cfg.mlir --convert-memref-to-llvm \
+  --convert-arith-to-llvm --convert-func-to-llvm \
+  --convert-cf-to-llvm --reconcile-unrealized-casts \
+  -o 03_llvm_dialect.mlir
+mlir-translate-15 --mlir-to-llvmir \
+  03_llvm_dialect.mlir -o 04_vecadd.ll
+\end{lstlisting}
+\end{minipage}\par
+MemRef 降低后需要显式表达指针、偏移、维度和步长。实验通过 \texttt{llvm.emit\_c\_interface} 生成 C 接口，以包含 allocated/aligned 指针、offset、sizes 和 strides 的一维描述符传入数组。这里的静态类型 \texttt{memref<4xf32>} 要求 offset 为 0、size 为 4、stride 为 1；描述符含有这些字段并不表示该函数支持任意步长。三个 MemRef 在内部函数签名中展开为 15 个参数，外层 C 包装函数仍接收三个描述符指针。
 
-按课件的分层说明，HFusion 保留较高层的算子和融合信息；HIVM 引入设备地址空间、存储分配及同步；HACC 表达异构执行与入口语义。逐层降低的意义是让适合高层语义的优化在信息尚未丢失时完成，再逐渐引入硬件约束。片上空间分配、搬运与计算之间的同步等要求，在普通 CPU 向量加的表示中并不以同样方式出现。
+表\ref{tab:lowering}以保存的转储对照同一循环。LLVM 方言的 \texttt{llvm.fadd} 仍是 MLIR 操作；经 \texttt{mlir-translate} 后才成为 LLVM IR 的 \texttt{fadd} 指令，两者不能只因名称相近便混为同一表示。
+\begin{table}[H]
+\centering\small
+\caption{VecAdd 核心循环在各层的实测变化}\label{tab:lowering}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+阶段 & 控制流与数据表示 & 数值／内存操作\\
+\midrule
+结构化 MLIR & \texttt{scf.for}、\texttt{index} 循环变量 & 2 次 \texttt{memref.load}、1 次加法、1 次写回\\
+CF 层 & \texttt{cf.cond\_br} 和块参数 & MemRef 访存及 \texttt{arith.addf} 保留\\
+LLVM 方言 & \texttt{llvm.cond\_br}、\texttt{i64} 索引、描述符 & 3 个 GEP、2 个 load、1 个 \texttt{llvm.fadd}、1 个 store\\
+LLVM IR & \texttt{br}、\texttt{phi i64} 和指针 & \texttt{getelementptr/load/fadd/store}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+最终 IR 中 \texttt{\%32 = phi i64 [ \%44, \%34 ], [ 0, \%15 ]} 接收初值和回边值；循环体的 \texttt{\%41 = fadd float \%37, \%40} 对应起始的 \texttt{arith.addf}。加法本身保持一一对应，新增操作主要承担控制流、地址计算和 ABI 适配，故降低过程不能仅按 IR 行数评价优劣。
 
-官方文档给出的设备端编译命令为：
-\begin{lstlisting}
+最终 LLVM IR 经 verifier 检查，再由 Clang 与 C 驱动链接。三组逐元素检查分别得到：基本输入 $(1.5,4.5,7.5,10.5)$；正负混合输入 $(-1,-2,0,-0.125)$；将输出与第一输入设为同一数组时仍得到后一结果，共 $3\times4=12$ 个元素通过。原地测试只覆盖两者完全重合，不扩展为任意部分重叠的保证。各数值均可由二进制精确表示，故此处使用等值比较。
+
+\subsection{官方 Ascend VecAdd 与方言分工}
+课程进阶要求允许在环境配置困难时通过阅读文档说明探索过程。实验据此阅读课程课件与官方 VecAdd 页面\cite{guide,ascend,bisheng}，在 \path{prep/03_mlir/ascend_vecadd.mlir} 保留注明来源的参考程序。
+
+官方示例处理 16 个 \texttt{i16} 元素。参数位于 GM 地址空间，两个 \texttt{hivm.hir.load} 将输入搬入 UB，\texttt{hivm.hir.vadd} 在片上完成加法，再由 \texttt{hivm.hir.store} 写回 GM。\texttt{hacc.entry} 与 DEVICE 属性表达设备入口。该程序已经包含硬件相关操作，不能把它称为未经降低的通用高层算子。
+
+\begin{table}[H]
+\centering\small
+\caption{课程材料中的 AscendNPU IR 分工}\label{tab:ascend}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+表示 & 主要表达内容 & VecAdd 探索中的关注点\\
+\midrule
+HFusion & 较高层算子及融合相关信息 & 在结构尚保留时进行变换与融合\\
+HIVM & 设备操作、地址空间、搬运及同步约束 & GM/UB、load/vadd/store\\
+HACC & 异构执行、设备入口与函数属性 & entry、DEVICE 与主机／设备协作\\
+\bottomrule
+\end{tabularx}
+\end{table}
+这些方言承载不同职责，可在表示中协作；HACC 不是简单排在 HIVM 之后、替换全部算子的单一流水级。逐层降低让高层优化保留所需语义，再逐步落到存储、指令和硬件资源约束。
+
+\subsection{从官方示例推导存储与同步约束}
+为使调研落到具体程序，沿官方例子的两次 load、一次 vadd、一次 store 追踪数据依赖，并与架构文档中的核内存储和流水映射职责对照\cite{ascendarch}。三个 UB 缓冲区的逻辑载荷各为 $16\times2=32$ 字节，合计 96 字节；GM 的逻辑读写量为 $2\times32+32=96$ 字节。这只是按元素数推导的有效载荷，实际分配可能包含对齐、临时空间或复用，不能冒充内存规划 pass 的实测结果。
+
+\Needspace{9\baselineskip}
+图\ref{fig:ascenddeps}给出需要保持的偏序：向量加必须等两个输入搬入 UB 后才可执行，写回必须等待加法结果。该图表达数据依赖，不指定真实事件号或同步指令；专用编译器还需将依赖映射到硬件流水。
+\begin{figure}[H]
+\centering\small
+\begin{tikzpicture}[>=stealth,every node/.style={font=\small},
+  box/.style={draw=black!45,rounded corners=2pt,align=center,minimum height=0.85cm}]
+\node[box] (a) at (0,0.6) {GM 输入 A\\load 到 UB};
+\node[box] (b) at (0,-0.6) {GM 输入 B\\load 到 UB};
+\node[box] (add) at (3.4,0) {UB 内 vadd\\16 个 i16 相加};
+\node[box] (out) at (6.7,0) {store 到 GM\\结果 C};
+\draw[->] (a.east) -- (add.west);
+\draw[->] (b.east) -- (add.west);
+\draw[->] (add.east) -- (out.west);
+\end{tikzpicture}
+\caption{由官方 VecAdd 源码推导的数据依赖；非设备实测时间线}\label{fig:ascenddeps}
+\end{figure}
+这个小样例只有一个向量加，没有相邻算子可融合，也不含 Cube 运算，因而不能用它声称已验证算子融合收益或 Cube/Vector 混合核拆分。它适合观察地址空间、搬运、内存规划和同步约束何时进入 IR。课件中的地址偏移、同步伪码与 \texttt{llvm.npu.*} 名称用于解释原理；本报告没有将其作为特定版本的真实 pass 输出。
+
+官方设备端编译方式为：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
 bishengir-compile add.mlir -enable-hivm-compile -o kernel.o
 \end{lstlisting}
-之后需由 CANN host 程序注册设备二进制、启动 kernel 并传回结果。本机缺少 BishengIR、CANN 和昇腾运行环境，因此只完成了此部分文档与方言分析，没有生成设备二进制或运行 NPU 程序。项目中的官方参考代码已注明来源；通用 MLIR 的实测记录与上述文档分析分别保存。
+\end{minipage}\par
+随后由 CANN host 程序加载或注册设备二进制、启动 kernel 并取回结果。本次环境的 PATH 中未找到 \texttt{bishengir-compile}、\texttt{bishengir-opt}、\texttt{hivmc} 或 \texttt{npu-smi}，默认 CANN 安装目录也不存在。实际用 \texttt{mlir-opt-15} 读取参考程序时，工具在 \texttt{hivm.address\_space} 处报告 \texttt{unregistered dialect} 并返回 1，诊断保存在 \path{report/evidence/ascend-probe.json}。允许未注册方言只能绕过相应解析限制，不能补上缺失的验证器和 lowering pass；因此未生成设备二进制，也未采集专用 pass 转储。
 
+阅读官方 host 代码时还发现，其比较循环打印 \texttt{Expect} 和 \texttt{Result}，随后直接打印成功提示；循环本身未因数值不等而报错。因此，未来上板验证应检查全部 16 个元素相等并在失败时返回非零值，同时检查运行时调用结果，不能把示例中的成功字符串单独当作正确性证据。通用 MLIR 的 C 驱动已经采用逐元素检查并返回失败状态。
+
+\subsection{比较与探索边界}
+通用实验明确展示了“结构化循环 $\rightarrow$ 显式 CFG $\rightarrow$ LLVM 方言 $\rightarrow$ LLVM IR”的实测过程。Ascend 文档则补充了 CPU 样例中不显式出现的片上存储、数据搬运和设备入口。前者验证逐层转换后的数值结果，后者用于理解专用方言的设计。两部分共同说明多级表示的价值，但通用实验通过并不能证明 Ascend 参考程序在 NPU 上通过；设备专用调度、同步和性能仍需相应工具链与硬件验证。
+
+\Needspace{15\baselineskip}
 \section{结论}
-实验把编译过程分解为可检查的阶段，观察了宏替换、Token 与 AST、语义诊断、SSA 提升、机器码、符号和重定位。等价编程说明，低层表示需要显式处理控制流、变量生命周期、数值类型和调用约定；短路副作用与数组浮点样例可以暴露仅看简单阶乘无法发现的问题。通用 MLIR 的实测与 Ascend 文档分析进一步展示了中间表示抽象层级的差异。
+本实验通过阶段产物建立了源程序与目标程序之间可检查的联系。预处理改变编译输入，前端组织并检查程序语义，中端将控制流及数据流显式化并优化，后端结合目标指令和调用约定生成汇编，汇编器与链接器再完成机器码、符号与地址的组织。
 
-后续实现 SysY 编译器时，将沿用本实验的输入用例、运行库与目标环境，逐步完成 AST、符号表和类型检查、SSA 中间代码、优化及自行实现的 RISC-V 后端，并增加错误输入和边界条件测试。
+等价编程的 170 次比对和编译流程的 85 次检查均通过。短路副作用、二维数组寻址、递归调用、负数除余和浮点舍入，是低层实现中需要维护的语义；SSA 提升与 O2 对照则表明，正确性、指令结构、文件体积和性能是不同问题。MLIR 四级转储及 12 个输出元素验证说明逐层转换如何保留计算；Ascend 调研则进一步把向量加映射到地址空间、搬运和同步依赖。后续课程编译器可复用这些样例与运行环境，逐步实现语法分析、类型检查、SSA、优化及自有 RISC-V 后端。
 
-\begin{thebibliography}{9}
-\bibitem{sysy} 课程资料. SysY2022语言定义 V1 与 SysY文法补充说明.
-\bibitem{runtime} 课程资料. SysY2022运行时库 V1 与 lib.tar.gz.
+\appendix
+\ctexset{section={name={附录,},number=\Alph{section}}}
+\renewcommand{\sectionmark}[1]{\markboth{附录\Alph{section}\quad #1}{}}
+\section{复现与结果文件}
+在 Ubuntu／WSL 安装表\ref{tab:tools}中的工具，并将课程运行库放入 \path{runtime/lib.tar.gz} 后，在仓库根目录执行：
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[numbers=none]
+make prep       # compilation stages, 170 equivalence checks, MLIR
+make test       # current compiler lexer regression tests
+make report     # export PDF from report/preparation.tex
+make clean      # remove rebuildable intermediates
+\end{lstlisting}
+\end{minipage}\par
+\path{report/evidence/results.json} 保存执行时间、工具版本、源码及运行库 SHA-256、命令、输入和实际输出；\path{report/evidence/observations.txt} 保存报告使用的 GIMPLE、IR、汇编、诊断及 MLIR 各层输出。\path{build/} 中的完整日志与二进制可重新生成，清理不会删除上述报告依据。词法分析器测试仅验证当前工程状态，不计入本次预备实验的 170 次等价比对。
+
+\clearpage
+\begin{thebibliography}{10}
+\addcontentsline{toc}{section}{参考文献}
+\bibitem{assignment} 课程资料. 预备工作：了解你的编译器，上机作业要求与作业完成要求.
+\bibitem{sysy} 课程资料. SysY2022 语言定义 V1；SysY 文法补充说明.
+\bibitem{runtime} 课程资料. SysY2022 运行时库 V1；lib.tar.gz.
 \bibitem{guide} 课程资料. 编译器开发环境部署；了解编译器与 LLVM IR 编程；AscendNPU-IR 课件.
+\bibitem{gcc} GNU Project. GCC 12.3 Manual: Options Controlling the Kind of Output. \url{https://gcc.gnu.org/onlinedocs/gcc-12.3.0/gcc/Overall-Options.html}.
 \bibitem{llvm} LLVM Project. LLVM Language Reference Manual. \url{https://llvm.org/docs/LangRef.html}.
+\bibitem{riscv} RISC-V International. RISC-V ABIs Specification. \url{https://riscv-non-isa.github.io/riscv-elf-psabi-doc/}.
 \bibitem{mlir} LLVM Project. MLIR Documentation. \url{https://mlir.llvm.org/docs/}.
-\bibitem{ascend} Huawei. AscendNPU IR 编译与执行示例. \url{https://ascendnpu-ir.gitcode.com/zh_cn/sources/introduction/quick_start/examples_zh.html}. 访问日期：2026年10月9日.
+\bibitem{ascend} Huawei. AscendNPU IR：编译与执行示例. \url{https://ascendnpu-ir.gitcode.com/zh_cn/sources/introduction/quick_start/examples_zh.html}. 阅读日期：2026年10月10日.
+\bibitem{ascendarch} Huawei. AscendNPU IR：架构设计. \url{https://ascendnpu-ir.gitcode.com/zh_cn/sources/introduction/architecture_zh.html}. 阅读日期：2026年10月10日.
+\bibitem{bisheng} Huawei. 毕昇编译器与 CANN. \url{https://www.hiascend.com/cann/bisheng}.
 \end{thebibliography}
 \end{document}

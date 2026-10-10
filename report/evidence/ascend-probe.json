@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-10T09:15:10.364356+00:00",
+  "command": [
+    "mlir-opt-15",
+    "prep/03_mlir/ascend_vecadd.mlir",
+    "-o",
+    "/dev/null"
+  ],
+  "returncode": 1,
+  "stderr": "prep/03_mlir/ascend_vecadd.mlir:6:46: error: #\"hivm\"<\"address_space<gm>\"> : 'none' attribute created with unregistered dialect. If this is intended, please call allowUnregisteredDialects() on the MLIRContext, or use -allow-unregistered-dialect with the MLIR opt tool used\n  func.func @add(%arg0: memref<16xi16, #hivm.address_space<gm>>,\n                                             ^\n",
+  "tools_on_path": {
+    "bishengir-compile": null,
+    "bishengir-opt": null,
+    "hivmc": null,
+    "npu-smi": null
+  },
+  "default_cann_path_exists": false
+}

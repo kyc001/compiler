@@ -1,4 +1,4 @@
-.PHONY: all compiler test prep report
+.PHONY: all compiler test prep report clean
 all: compiler
 compiler:
 	cmake -S . -B build/compiler -DCMAKE_BUILD_TYPE=Debug
@@ -8,9 +8,6 @@ test: compiler
 prep:
 	python3 scripts/run_preparation.py
 report:
-	mkdir -p build/report output/pdf
-	xelatex -interaction=nonstopmode -halt-on-error -output-directory=build/report report/preparation.tex
-	xelatex -interaction=nonstopmode -halt-on-error -output-directory=build/report report/preparation.tex
-	cp build/report/preparation.pdf output/pdf/preparation.pdf
-
-
+	python3 scripts/build_report.py
+clean:
+	python3 scripts/clean.py
